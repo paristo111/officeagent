@@ -92,7 +92,7 @@
       width: 100px;
       left: 50%;
       bottom: 5vh;               /* 땅의 y 위치와 동일 */
-      transform: translateX(-100%);
+      transform: translateX(-101px);
       display: flex;
       flex-direction: column;
       gap: 25px;
@@ -104,7 +104,7 @@
       width: 100px;
       left: 50%;
       bottom: 5vh;               /* 땅의 y 위치와 동일 */
-      transform: translateX(0%);
+      transform: translateX(-1px);
       display: flex;
       flex-direction: column;
       gap: 25px;
@@ -147,7 +147,7 @@
     }
 
     .wall {
-      width: 83px;
+      width: 82px;
       height: 100%;
       transform: translateX(0%);
       border-right: 1px solid #000;
@@ -262,6 +262,7 @@
       height: 10px;              /* 조건 10: 세로 10px */
       background: #000000;
       bottom: 5vh;               /* 땅 바로 위에 발이 닿도록 */
+      z-index: 50;
     }
   </style>
 </head>
