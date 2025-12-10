@@ -84,6 +84,65 @@
       left: 50%;
       bottom: 5vh;               /* 땅의 y 위치와 동일 */
       transform: translateX(-50%);
+      z-index: 50;
+    }
+
+    .floor-container-l {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(-100%);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 30;
+    }
+
+    .floor-container-r {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(0%);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 0;
+    }
+
+    /* 바닥 */
+    .floor {
+      width: 100%;
+      height: 25px;              /* 지붕 높이 – 수정 가능 */
+      border: 1px solid #000;    /* 모든 선 1px */
+      border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
+      background: #f00;
+      transform-origin: bottom left;
+      transform: skewX(36deg);  /* 기울기 조절 */
+    }
+
+    .wall-container {
+      position: absolute;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      display: flex;
+      flex-direction: row;
+      transform: translateX(-50%);
+    }
+
+    .wall-l {
+      position: absolute;
+      width: 100px;
+      background: #ddd;
+      z-index: 20;
+    }
+
+    .wall-r {
+      position: absolute;
+      width: 100px;
+      background: #ccc;
+      z-index: 20;
     }
 
     .building-wrapper {
@@ -119,7 +178,7 @@
     table.building {
       border-collapse: collapse;  /* 내부 격자 선을 1px로 유지 */
       border: 1px solid #000;    /* 건물 외곽선 */
-      background: #ffffff;
+      background: #fff0;
     }
 
     table.building td {
@@ -155,6 +214,23 @@
       background: #f0f0f0;       /* 눌렀을 때 살짝 강조 (원치 않으면 제거) */
     }
 
+    .room-button-empty {
+      width: 100%;
+      height: 100%;
+      border: none;              /* 선은 td가 담당 */
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      
+      /* 조건 3: 배경 흰색, 글자 검정 */
+      background-color: none !important;
+      color: #000000 !important;
+      
+      /* 기본 클릭 효과 제거 */
+      outline: none;
+      box-shadow: none;
+    }
+
     /* ------------------------------
        사람 (땅 위에서 좌우로 걷는 작은 사각형)
        ------------------------------ */
@@ -179,6 +255,42 @@
 
     <!-- 땅 (가로선) -->
     <div class="ground"></div>
+    
+    <!-- 바닥 -->
+    <div class="floor-container-l">
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+    </div>
+    <div class="floor-container-r">
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+    </div>
+
+    <!-- 배경 -->
+    <div class="wall-container">
+      <div class="wall-l"></div>
+      <div class="wall-r"></div>
+    </div>
 
     <!-- 건물(항상 가운데, 땅 위에 닿게) -->
     <div class="building-container">
@@ -194,22 +306,22 @@
         <table class="building" aria-label="건물 호수 선택">
           <!-- 12층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 11층 -->
           <tr>
             <td><button class="room-button">홍혜림</button></td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 10층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 9층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
             <td><button class="room-button">박지원</button></td>
           </tr>
           <!-- 8층 -->
@@ -219,7 +331,7 @@
                 <button class="room-button">최정욱</button>
               </a>
             </td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 7층 -->
           <tr>
@@ -228,7 +340,7 @@
           </tr>
           <!-- 6층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
             <td><button class="room-button">조기봉</button></td>
           </tr>
           <!-- 5층 -->
@@ -238,18 +350,18 @@
           </tr>
           <!-- 4층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
             <td><button class="room-button">용자상</button></td>
           </tr>
           <!-- 3층 -->
           <tr>
-            <td><button class="room-button">임대문의</button></td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 2층 -->
           <tr>
             <td><button class="room-button">용서우</button></td>
-            <td><button class="room-button">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 1층 -->
           <tr>
