@@ -108,7 +108,7 @@
       display: flex;
       flex-direction: column;
       gap: 25px;
-      z-index: 0;
+      z-index: 10;
     }
 
     /* 바닥 */
@@ -117,32 +117,54 @@
       height: 25px;              /* 지붕 높이 – 수정 가능 */
       border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
-      background: #f00;
+      background: #ff0;
       transform-origin: bottom left;
       transform: skewX(36deg);  /* 기울기 조절 */
-    }
-
-    .wall-container {
-      position: absolute;
-      left: 50%;
-      bottom: 5vh;               /* 땅의 y 위치와 동일 */
-      display: flex;
-      flex-direction: row;
-      transform: translateX(-50%);
     }
 
     .wall-l {
       position: absolute;
       width: 100px;
-      background: #ddd;
+      height: 610px;
+      left: 50%;
+      bottom: 5vh;              /* 땅의 y 위치와 동일 */ 
+      transform: translateX(-100%);
+      width: 100px;
+      background: #ff0;
       z-index: 20;
     }
 
     .wall-r {
       position: absolute;
       width: 100px;
-      background: #ccc;
-      z-index: 20;
+      height: 610px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(0%);
+      width: 100px;
+      background: #ff0;
+      z-index: 0;
+    }
+
+    .wall {
+      width: 83px;
+      height: 100%;
+      transform: translateX(0%);
+      border-right: 1px solid #000;
+      background: #fff;
+      z-index: 0;
+    }
+
+    .wall-o {
+      position: absolute;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(-120px);
+      width: 20px;
+      height: 610px;
+      border-bottom: 1px solid #000;
+      background: #fff;
+      z-index: 40;
     }
 
     .building-wrapper {
@@ -285,12 +307,13 @@
         <div class="floor"></div>
         <div class="floor"></div>
     </div>
-
-    <!-- 배경 -->
-    <div class="wall-container">
-      <div class="wall-l"></div>
-      <div class="wall-r"></div>
+    <div class="wall-l">
+      <div class="wall"></div>
     </div>
+    <div class="wall-r">
+      <div class="wall"></div>
+    </div>
+    <div class="wall-o"></div>
 
     <!-- 건물(항상 가운데, 땅 위에 닿게) -->
     <div class="building-container">
