@@ -159,12 +159,22 @@
        사람 (땅 위에서 좌우로 걷는 작은 사각형)
        ------------------------------ */
     .person {
-      position: absolute;
-      width: 5px;                /* 조건 10: 가로 5px */
-      height: 10px;              /* 조건 10: 세로 10px */
-      background: #000000;
-      bottom: 5vh;               /* 땅 바로 위에 발이 닿도록 */
-    }
+  position: absolute;
+  /* GIF 파일의 실제 비율에 맞춰 크기를 조절해주세요 (예: 20px x 30px) */
+  width: 10px;
+  height: 15px;
+  
+  /* 배경을 GIF 이미지로 설정 */
+  background: url('images/walkingperson_40.gif') no-repeat bottom center;
+  background-size: contain; /* 이미지가 잘리지 않게 비율 유지 */
+  
+  bottom: 5vh;           /* 땅 높이와 동일 */
+  z-index: 3;
+  pointer-events: none;
+  
+  /* 좌우 반전 시 제자리에서 돌도록 중심축 설정 */
+  transform-origin: center bottom;
+}
   </style>
 </head>
 <body>
@@ -262,7 +272,7 @@
     // 사람(작은 사각형) 10명을 만들어 땅 위에서 걷게 하기
     // ------------------------------------------
     const PEOPLE_COUNT = 10;
-    const PERSON_WIDTH = 5; // CSS .person width와 동일하게 유지
+    const PERSON_WIDTH = 10; // CSS .person width와 동일하게 유지
     const persons = [];
     const scene = document.getElementById("scene");
 
@@ -307,38 +317,38 @@
     let lastTime = null;
 
     function animate(timestamp) {
-      if (!lastTime) lastTime = timestamp;
-      const dt = (timestamp - lastTime) / 1000; // 초 단위 delta time
-      lastTime = timestamp;
+  if (!lastTime) lastTime = timestamp;
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  const width = window.innerWidth;
 
-      const width = window.innerWidth;
-
-      persons.forEach((p) => {
-        // 일정 시간마다 방향을 랜덤하게 바꿀 기회 부여
-        if (timestamp > p.nextTurn) {
-          if (Math.random() < 0.5) {
-            p.dir *= -1; // 50% 확률로 방향 전환
-          }
-          p.nextTurn =
-            timestamp + 1000 + Math.random() * 4000; // 다음 전환 시각 예약
-        }
-
-        // x 위치 갱신 (속도 * 방향 * 시간)
-        p.x += p.dir * p.speed * dt;
-
-        // 화면 밖으로 나가면 반대쪽에서 다시 등장
-        if (p.x < -PERSON_WIDTH) {
-          p.x = width;
-        } else if (p.x > width) {
-          p.x = -PERSON_WIDTH;
-        }
-
-        // 실제 DOM 요소 위치 반영
-        p.el.style.left = p.x + "px";
-      });
-
-      requestAnimationFrame(animate);
+  persons.forEach(p => {
+    // 1. 방향 전환 로직 (기존 유지)
+    if (timestamp > p.nextTurn) {
+      if (Math.random() < 0.5) p.dir *= -1;
+      p.nextTurn = timestamp + 1000 + Math.random() * 4000;
     }
+
+    // 2. 위치 이동 (기존 유지)
+    p.x += p.dir * p.speed * dt;
+
+    // 3. 화면 밖 루프 (기존 유지)
+    if (p.x < -PERSON_WIDTH) p.x = width;
+    else if (p.x > width) p.x = -PERSON_WIDTH;
+
+    // 4. 위치 적용
+    p.el.style.left = p.x + "px";
+
+    // [추가된 부분] 왼쪽(-1)으로 갈 때만 좌우 반전(scaleX(-1))
+    if (p.dir === -1) {
+      p.el.style.transform = "scaleX(-1)";
+    } else {
+      p.el.style.transform = "scaleX(1)";
+    }
+  });
+
+  requestAnimationFrame(animate);
+}
 
     // 창 크기가 바뀌더라도 최소한 화면을 벗어나지 않게 정리 (선택 사항)
     window.addEventListener("resize", () => {
