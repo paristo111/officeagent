@@ -40,6 +40,34 @@
     /* ------------------------------
        건물 (항상 땅 위, 가운데 배치)
        ------------------------------ */
+
+        
+    /* 간판 */    
+    .sign-container {
+      position: absolute;
+      left: 50%;
+      bottom: 5vh;
+      width: 27vh;
+      height: 8vh;
+      border: none;
+      background: #f000;
+      transform: translateX(-50%);
+      z-index: 60;
+    }
+
+    .sign {
+      position: absolute;
+      left: 100%;
+      width: 3vh;
+      border: 1px solid #000;
+      border-bottom: none;
+      background: #fff;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 1.6vh;
+      line-height: 1.2em;
+    }
+
     /* 바닥 */
     .floor-l {
       position: absolute;
@@ -242,6 +270,11 @@
 
     <!-- 땅 (가로선) -->
     <div class="ground"></div>
+
+    <!-- 간판 -->
+    <div class="sign-container">
+      <div class="sign">문식빌딩</div>
+    </div>
 
     <!-- 바닥 -->
     <div class="building-container">
