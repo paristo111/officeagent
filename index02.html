@@ -33,7 +33,7 @@
       top: 5vh;
       left: 0;
       right: 0;
-      height: 5vh;             /* 띠의 높이 – 필요 시 수정 */
+      height: 40px;             /* 띠의 높이 – 필요 시 수정 */
       overflow: hidden;
       background: #fff0;
       color: #000;
@@ -50,14 +50,14 @@
 
     .ticker-text {
       padding: 0 2rem;          /* 문장 간격 */
-      font-size: 2vh;
-      line-height: 3vh;
+      font-size: 16px;
+      line-height: 40px;
     }
 
     /* 텍스트가 오른쪽(100%)에서 왼쪽(-100%)으로 이동 */
     @keyframes marquee {
       from {
-        transform: translateX(200%);
+        transform: translateX(100%);
       }
       to {
         transform: translateX(-100%);
@@ -72,91 +72,100 @@
       left: 0;
       right: 0;
       bottom: 5vh;               /* 조건 5: 세로폭 5% 위 */
-      border-top: 0.075em solid #000;/* 조건 2, 4: 땅은 가로선 */
+      border-top: 1px solid #000;/* 조건 2, 4: 땅은 가로선 */
       box-sizing: border-box;
     }
 
     /* ------------------------------
        건물 (항상 땅 위, 가운데 배치)
        ------------------------------ */
-    /* 바닥 */
-    .floor-l {
-      position: absolute;
-      padding: 0;
-      width: 12vh;
-      height: 3vh;
-      border: 0.075em solid #000;    /* 모든 선 1px */
-      border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
-      background: #fff;
-      transform-origin: bottom left;
-      transform: skewX(36deg);  /* 기울기 조절 */
-      z-index: 30;
-    }
-
-    .floor-r {
-      position: absolute;
-      padding: 0;
-      width: 12vh;
-      height: 3vh;
-      border: 0.075em solid #000;    /* 모든 선 1px */
-      border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
-      background: #fff;
-      transform-origin: bottom left;
-      transform: skewX(36deg);  /* 기울기 조절 */
-      z-index: 10;
-    }
-
-    .wall-l {
-      position: absolute;
-      width: 12vh;
-      height: 74vh;
-      left: 50%;
-      bottom: 0;              /* 땅의 y 위치와 동일 */ 
-      display: flex;
-      justify-content: flex-end;
-      transform: translateX(-100%);
-      background: #fff0;
-      z-index: 20;
-    }
-
-    .wall-r {
-      position: absolute;
-      width: 12vh;
-      height: 74vh;
-      left: 50%;
-      bottom: 0;              /* 땅의 y 위치와 동일 */ 
-      display: flex;
-      justify-content: flex-end;
-      transform: translateX(0%);
-      background: #fff0;
-      z-index: 0;
-    }
-
-    .wall {
-      width: 2.0vh;
-      height: 100%;
-      transform-origin: bottom right;
-      border-left: 0.075em solid #000;
-      background: #fff;
-      z-index: 0;
-    }
-
-    .vertical-line {
-      position: absolute;
-      left: -2.35vh;         /* 건물 왼쪽 벽 위치 */
-      top: -3.1vh;         /* 지붕 꼭대기(높이 30px)에서 시작 */
-      bottom: 0;          /* 건물 바닥(땅)까지 */
-      width: 0.075em;         /* 두께 1px */
-      background: #000;
-      z-index: 10;
-    }
-
     .building-container {
       position: absolute;
       left: 50%;
       bottom: 5vh;               /* 땅의 y 위치와 동일 */
       transform: translateX(-50%);
       z-index: 50;
+    }
+
+    .floor-container-l {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(-101px);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 30;
+    }
+
+    .floor-container-r {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(-1px);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 10;
+    }
+
+    /* 바닥 */
+    .floor {
+      width: 100%;
+      height: 25px;              /* 지붕 높이 – 수정 가능 */
+      border: 1px solid #000;    /* 모든 선 1px */
+      border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
+      background: #fff;
+      transform-origin: bottom left;
+      transform: skewX(36deg);  /* 기울기 조절 */
+    }
+
+    .wall-l {
+      position: absolute;
+      width: 100px;
+      height: 610px;
+      left: 50%;
+      bottom: 5vh;              /* 땅의 y 위치와 동일 */ 
+      transform: translateX(-100%);
+      width: 100px;
+      background: #fff;
+      z-index: 20;
+    }
+
+    .wall-r {
+      position: absolute;
+      width: 100px;
+      height: 610px;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(0%);
+      width: 100px;
+      background: #fff;
+      z-index: 0;
+    }
+
+    .wall {
+      width: 82px;
+      height: 100%;
+      transform: translateX(0%);
+      border-right: 1px solid #000;
+      background: #fff;
+      z-index: 0;
+    }
+
+    .wall-o {
+      display: none;
+      position: absolute;
+      left: 50%;
+      bottom: 5vh;               /* 땅의 y 위치와 동일 */
+      transform: translateX(-120px);
+      width: 20px;
+      height: 610px;
+      border-bottom: 1px solid #000;
+      background: #fff;
+      z-index: 40;
     }
 
     .building-wrapper {
@@ -170,26 +179,36 @@
       bottom: 100%;
       left: 0;
       right: 0;
-      height: 3.005vh;              /* 지붕 높이 – 수정 가능 */
-      border: 0.075em solid #000;    /* 모든 선 1px */
+      height: 25px;              /* 지붕 높이 – 수정 가능 */
+      border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
       background: #ffffff;
       transform-origin: bottom left;
       transform: skewX(36deg);  /* 기울기 조절 */
     }
 
+    .vertical-line {
+      position: absolute;
+      left: -19px;         /* 건물 왼쪽 벽 위치 */
+      top: -26px;         /* 지붕 꼭대기(높이 30px)에서 시작 */
+      bottom: 0;          /* 건물 바닥(땅)까지 */
+      width: 1px;         /* 두께 1px */
+      background: #000;
+      z-index: 10;
+    }
+
     /* 건물 본체는 표(table)로 구현하여 선을 1px로 정확히 맞춤 */
     table.building {
       border-collapse: collapse;  /* 내부 격자 선을 1px로 유지 */
-      border: 0.075em solid #000;    /* 건물 외곽선 */
+      border: 1px solid #000;    /* 건물 외곽선 */
       background: #fff0;
     }
 
     table.building td {
-      border: 0.075em solid #000;    /* 각 방의 선도 1px */
+      border: 1px solid #000;    /* 각 방의 선도 1px */
       padding: 0;
-      width: 12vh;               /* 한 칸 가로 – 수정 가능 */
-      height: 6vh;              /* 한 칸 세로 – 수정 가능 */
+      width: 100px;               /* 한 칸 가로 – 수정 가능 */
+      height: 50px;              /* 한 칸 세로 – 수정 가능 */
       text-align: center;
       vertical-align: middle;
     }
@@ -201,11 +220,11 @@
       border: none;              /* 선은 td가 담당 */
       background: transparent;
       cursor: pointer;
-      font-size: 1.6vh;
+      font-size: 14px;
       
       /* 조건 3: 배경 흰색, 글자 검정 */
-      background-color: #fff !important;
-      color: #000 !important;
+      background-color: #ffffff !important;
+      color: #000000 !important;
       
       /* 기본 클릭 효과 제거 */
       outline: none;
@@ -215,7 +234,7 @@
     .room-button:active,
     .room-button:focus {
       outline: none;
-      background: #fff;       /* 눌렀을 때 살짝 강조 (원치 않으면 제거) */
+      background: #f0f0f0;       /* 눌렀을 때 살짝 강조 (원치 않으면 제거) */
     }
 
     .room-button-empty {
@@ -224,7 +243,7 @@
       border: none;              /* 선은 td가 담당 */
       background: transparent;
       cursor: pointer;
-      font-size: 1.6vh;
+      font-size: 14px;
       
       /* 조건 3: 배경 흰색, 글자 검정 */
       background-color: none !important;
@@ -240,11 +259,11 @@
        ------------------------------ */
     .person {
       position: absolute;
-      width: 0.4vh;                /* 조건 10: 가로 5px */
-      height: 1.5vh;              /* 조건 10: 세로 10px */
+      width: 3px;                /* 조건 10: 가로 5px */
+      height: 10px;              /* 조건 10: 세로 10px */
       background: #000000;
       bottom: 5vh;               /* 땅 바로 위에 발이 닿도록 */
-      z-index: 100;
+      z-index: 50;
     }
   </style>
 </head>
@@ -260,130 +279,69 @@
 
     <!-- 땅 (가로선) -->
     <div class="ground"></div>
-
-    <!-- 바닥 -->
-    <div class="building-container">
-      <div class="building-wrapper">
     
-        <!-- 벽 -->
-        <div class="wall-l">
-          <div class="wall"></div>
-        </div>
-        <div class="wall-r">
-          <div class="wall"></div>
-        </div>
-
-        <table class="building" aria-label="건물 호수 선택">
-          <!-- 12층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 11층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 10층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 9층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 8층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 7층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 6층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 5층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 4층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 3층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 2층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-          <!-- 1층 -->
-          <tr>
-            <td><div class="floor-l"></div></td>
-            <td><div class="floor-r"></div></td>
-          </tr>
-        </table>    
-      </div>
+    <!-- 바닥 -->
+    <div class="floor-container-l">
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
     </div>
+    <div class="floor-container-r">
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+        <div class="floor"></div>
+    </div>
+    <div class="wall-l">
+      <div class="wall"></div>
+    </div>
+    <div class="wall-r">
+      <div class="wall"></div>
+    </div>
+    <div class="wall-o"></div>
 
     <!-- 건물(항상 가운데, 땅 위에 닿게) -->
     <div class="building-container">
       <div class="building-wrapper">
+        <!-- 지붕 -->
+        <div class="roof"></div>
+
         <!-- 조건 1: 지붕 위 꼭대기부터 땅까지 이어지는 수직선 -->
         <div class="vertical-line"></div>
 
         <!-- 방들: 9층~1층, A/B 동 -->
         <!-- td는 사각형, 그 안의 버튼이 실제 클릭 영역 -->
         <table class="building" aria-label="건물 호수 선택">
-        <!-- 지붕 -->
-          <tr>
-            <div class="roof"></div>
-          </tr>
           <!-- 12층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">박지원</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button">박지원</button></td>
           </tr>
           <!-- 11층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">홍혜림</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button">홍혜림</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 10층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
             <td>              
               <a href="https://flatland1884.vercel.app/" target="new">
                 <button class="room-button">최정욱</button>
@@ -392,16 +350,8 @@
           </tr>
           <!-- 9층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">최예주</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button">최예주</button></td>
           </tr>
           <!-- 8층 -->
           <tr>
@@ -410,104 +360,44 @@
                 <button class="room-button">차리수</button>
               </a>
             </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 7층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">조기봉</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">이정아</button>
-              </a>
-            </td>
+            <td><button class="room-button">조기봉</button></td>
+            <td><button class="room-button">이정아</button></td>
           </tr>
           <!-- 6층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">이종은</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button">이종은</button></td>
           </tr>
           <!-- 5층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">유도원</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button">유도원</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 4층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">용자상</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button">용자상</button></td>
           </tr>
           <!-- 3층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button-empty">임대문의</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 2층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">용서우</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button-empty">임ㅤ대</button>
-              </a>
-            </td>
+            <td><button class="room-button">용서우</button></td>
+            <td><button class="room-button-empty">임대문의</button></td>
           </tr>
           <!-- 1층 -->
           <tr>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">김태호</button>
-              </a>
-            </td>
-            <td>
-              <a href="" target="new">
-                <button class="room-button">권진명</button>
-              </a>
-            </td>
+            <td><button class="room-button">김태호</button></td>
+            <td><button class="room-button">권진명</button></td>
           </tr>
-        </table>    
+        </table>
       </div>
     </div>
   </div>
@@ -516,7 +406,7 @@
     // ------------------------------------------
     // 사람(작은 사각형) 10명을 만들어 땅 위에서 걷게 하기
     // ------------------------------------------
-    const PEOPLE_COUNT = 13;
+    const PEOPLE_COUNT = 10;
     const PERSON_WIDTH = 5; // CSS .person width와 동일하게 유지
     const persons = [];
     const scene = document.getElementById("scene");
