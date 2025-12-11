@@ -72,7 +72,7 @@
       left: 0;
       right: 0;
       bottom: 5vh;               /* 조건 5: 세로폭 5% 위 */
-      border-top: 0.075em solid #000;/* 조건 2, 4: 땅은 가로선 */
+      border-top: 1px solid #000;/* 조건 2, 4: 땅은 가로선 */
       box-sizing: border-box;
     }
 
@@ -85,7 +85,7 @@
       padding: 0;
       width: 12vh;
       height: 3vh;
-      border: 0.075em solid #000;    /* 모든 선 1px */
+      border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
       background: #fff;
       transform-origin: bottom left;
@@ -98,7 +98,7 @@
       padding: 0;
       width: 12vh;
       height: 3vh;
-      border: 0.075em solid #000;    /* 모든 선 1px */
+      border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
       background: #fff;
       transform-origin: bottom left;
@@ -136,17 +136,17 @@
       width: 2.0vh;
       height: 100%;
       transform-origin: bottom right;
-      border-left: 0.075em solid #000;
+      border-left: 1px solid #000;
       background: #fff;
       z-index: 0;
     }
 
     .vertical-line {
       position: absolute;
-      left: -2.35vh;         /* 건물 왼쪽 벽 위치 */
+      left: -2.3vh;         /* 건물 왼쪽 벽 위치 */
       top: -3.1vh;         /* 지붕 꼭대기(높이 30px)에서 시작 */
       bottom: 0;          /* 건물 바닥(땅)까지 */
-      width: 0.075em;         /* 두께 1px */
+      width: 1px;         /* 두께 1px */
       background: #000;
       z-index: 10;
     }
@@ -171,7 +171,7 @@
       left: 0;
       right: 0;
       height: 3.005vh;              /* 지붕 높이 – 수정 가능 */
-      border: 0.075em solid #000;    /* 모든 선 1px */
+      border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
       background: #ffffff;
       transform-origin: bottom left;
@@ -181,12 +181,12 @@
     /* 건물 본체는 표(table)로 구현하여 선을 1px로 정확히 맞춤 */
     table.building {
       border-collapse: collapse;  /* 내부 격자 선을 1px로 유지 */
-      border: 0.075em solid #000;    /* 건물 외곽선 */
+      border: 1px solid #000;    /* 건물 외곽선 */
       background: #fff0;
     }
 
     table.building td {
-      border: 0.075em solid #000;    /* 각 방의 선도 1px */
+      border: 1px solid #000;    /* 각 방의 선도 1px */
       padding: 0;
       width: 12vh;               /* 한 칸 가로 – 수정 가능 */
       height: 6vh;              /* 한 칸 세로 – 수정 가능 */
