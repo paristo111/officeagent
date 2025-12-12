@@ -42,31 +42,75 @@
        ------------------------------ */
 
         
-    /* 간판 */    
-    .sign-container {
+    /* 경고 */
+    .alarm {
       position: absolute;
       left: 50%;
-      bottom: 5vh;
-      width: 27vh;
-      height: 8.4vh;
+      bottom: 25vh;
       border: none;
-      background: #f000;
+      font-size: 10vh;
+      background: #ff0;
+      color: #000;
       transform: translateX(-50%);
-      z-index: 60;
+      z-index: 100;
     }
 
-    .sign {
-      position: relative;
-      left: 100%;
-      width: 3vh;
-      height: 100%;
-      border: 1px solid #000;
+    /* 옥탑 */
+    .rooftop-container {
+      position: absolute;
+      left: 50%;
+      bottom: 85.0vh;
+      width: 25vh;
+      border: none;
+      background: #f00;
+      transform: translateX(8%);
+      z-index: 50;
+    }
+
+    .rooftop-l {
+      position: absolute;
+      width: 1.2vh;
+      height: 4vh;
+      top: 0;
+      border: 1px solid #000;    /* 모든 선 1px */
+      border-top: none;
+      border-right: none;
+      background: #fff;
+      transform: skewY(52deg);  /* 기울기 조절 */
+      transform-origin: top left;
+    }
+
+    .rooftop-t {
+      position: absolute;
+      width: 6vh;
+      height: 1.7vh;
+      left: 0;
+      border: 1px solid #000;    /* 모든 선 1px */
+      background: #fff;
+      transform: skewX(38deg);  /* 기울기 조절 */
+      transform-origin: top left;
+    }
+
+    .rooftop-f {
+      position: absolute;
+      width: 6.05vh;
+      height: 3.95vh;
+      left: 1.45vh;
+      top: 1.75vh;
+      border: 1px solid #000;    /* 모든 선 1px */
+      background: #fff;
+    }
+
+    .rooftop-d {
+      position: absolute;
+      width: 1.0vh;
+      height: 2.0vh;
+      left: 3.0vh;
+      bottom: 0;
+      border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;
       background: #fff;
-      text-align: center;
-      vertical-align: middle;
-      font-size: 1.6vh;
-      line-height: 1.2em;
+      transform-origin: bottom left;
     }
 
     /* 바닥 */
@@ -271,11 +315,6 @@
 
     <!-- 땅 (가로선) -->
     <div class="ground"></div>
-
-    <!-- 간판 -->
-    <div class="sign-container">
-      <div class="sign">문<br>식<br>빌<br>딩<br></div>
-    </div>
 
     <!-- 바닥 -->
     <div class="building-container">
@@ -526,6 +565,17 @@
         </table>    
       </div>
     </div>
+
+    <!-- 옥탑 -->
+    <div class="rooftop-container">
+      <div class="rooftop-l"></div>
+      <div class="rooftop-t"></div>
+      <div class="rooftop-f">
+        <div class="rooftop-d"></div>
+      </div>
+    </div>
+
+    <!-- <div class="alarm">공사중</div> -->
   </div>
 
   <script>
@@ -634,13 +684,13 @@
       count: 3, 
       // 텍스트 목록
       messages: [
-        "매물 있습니다. 11개 사무실 선택 가능합니다. 둘러보시고 편하게 문의주세요.",
+        "매물 있습니다. 11개 사무실 선택 가능합니다. 눌러보시고 편하게 문의주세요.",
         "사무실 임대 룸 13개 계약완료. 11개 즉시 입주 가능.",
-        "매물 있습니다!",
+        "매물 있습니다!", "눌러보세요!",
         "온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다.",
-        "새로 만든 단기 사무실 임대 룸 11개! 관악 전문",
-        "전용 무제한 평방 픽셀, 넓은 개방형 업무공간, 채광/환기 우수, 즉시 입주 가능!",
-        "사무실 단기임대 합리적인 최적의 풀옵션 시설!",
+        "새로 만든 단기 사무실 임대 룸 11개! 관악 전문! 눌러보세요!",
+        "전용 무제한 평방 픽셀, 넓은 개방형 업무공간, 채광/환기 우수, 즉시 누르기 가능!",
+        "사무실 단기임대 합리적인 최적의 풀옵션 시설! 눌러보세요!",
         "무보증 사무실 단기임대 12월 19일부터 21일까지!"
       ],
       // 생성 높이 (화면 상단 5% ~ 50%)
