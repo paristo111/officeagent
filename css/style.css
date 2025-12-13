@@ -181,9 +181,8 @@
     /* 지붕 – 기울어진 사각형으로 간단하게 표현 */
     .roof {
       position: absolute;
-      bottom: 73.15vh;
-      left: 0;
-      right: 0;
+      bottom: 100%;
+      width: 24.1vh;
       height: 3.005vh;              /* 지붕 높이 – 수정 가능 */
       border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
