@@ -302,7 +302,7 @@
       transition: height 0.75s ease-in-out; /* 3,8. 1초 애니메이션 */
       display: flex;
       flex-direction: column;
-      /* box-shadow: 0 4px 12px rgba(0,0,0,0.3); */
+      /* box-shadow: 0 4px 12px #0005; */
       transform: translateX(-50%);
     }
 
