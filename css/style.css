@@ -123,7 +123,7 @@
     .wall-l {
       position: absolute;
       width: 12vh;
-      height: 73.2vh;
+      height: 100%;
       left: 50%;
       bottom: 0;              /* 땅의 y 위치와 동일 */ 
       display: flex;
@@ -136,7 +136,7 @@
     .wall-r {
       position: absolute;
       width: 12vh;
-      height: 73.2vh;
+      height: 100%;
       left: 50%;
       bottom: 0;              /* 땅의 y 위치와 동일 */ 
       display: flex;
@@ -187,7 +187,7 @@
       height: 3.005vh;              /* 지붕 높이 – 수정 가능 */
       border: 1px solid #000;    /* 모든 선 1px */
       border-bottom: none;       /* 아래쪽은 본체와 맞닿으므로 제거 */
-      background: #fff0;
+      background: #fff;
       transform-origin: bottom left;
       transform: skewX(36deg);  /* 기울기 조절 */
     }
