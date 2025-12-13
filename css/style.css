@@ -292,7 +292,7 @@
     /* 현수막 */
     #banner {
       position: absolute; /* building의 부모 relative 기준으로 위치 */
-      top: 22.5vh; left: 50%; /* building 앞에 정확히 위치 조정 필요 */
+      top: 0; left: 50%; /* building 앞에 정확히 위치 조정 필요 */
       width: 22vh; /* 2. 가로 20vh -> vh로 반응형 조정 */
       height: 56vh; /* 2. 세로 1vh */
       border: 1px solid #000;
