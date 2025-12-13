@@ -295,11 +295,11 @@
       }
     }
 
-    /* 1-2. 초기 사각형: 20vh x 2vh, building 앞 완전 가림 */
+    /* 현수막 */
     #movingOverlay {
       position: absolute; /* building의 부모 relative 기준으로 위치 */
       top: 22.5vh; left: 50%; /* building 앞에 정확히 위치 조정 필요 */
-      width: 16vw; /* 2. 가로 20vh -> vw로 반응형 조정 */
+      width: 22vh; /* 2. 가로 20vh -> vw로 반응형 조정 */
       height: 56vh; /* 2. 세로 2vh */
       border: 1px solid #000;
       background: #fff;
@@ -312,7 +312,7 @@
       transform: translateX(-50%);
     }
 
-    /* 4,6. 텍스트: 사각형 변화 무시하고 고정 위치/크기 */
+    /* 현수막 텍스트 */
     .overlay-text {
       position: absolute;
       padding: 1.2vh 0.6vh 1.2vh 1.2vh;
@@ -324,8 +324,21 @@
       pointer-events: none; /* 텍스트 클릭 방지 */
     }
 
-    /* 9. 버튼: 오른쪽 상단 고정 */
+    /* 눌러보세요! */
+    .overlay-text-close {
+      position: absolute;
+      top: 52vh; left: 50%;
+      font-size: 1.6vh; /* 고정 크기 */
+      line-height: 1.8;
+      white-space: pre-wrap; /* 텍스트 그대로 유지 */
+      transform: translateX(-50%);
+      z-index: 2;
+      pointer-events: none; /* 텍스트 클릭 방지 */
+    }
+
+    /* 버튼 */
     .close-btn {
+      display: none;
       position: absolute;
       top: 1vh; left: 50%;
       background: none;
@@ -613,6 +626,7 @@
     <div class="moving-office-overlay" id="movingOverlay">
       <!-- 텍스트 -->
       <div class="overlay-text">온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다. 온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다. 온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다.</div>
+      <div class="overlay-text-close">눌러보세요!</div>
     <!-- 닫기 버튼 -->
     <button class="close-btn" id="closeBtn"></button>
 </div>
@@ -726,7 +740,7 @@
       messages: [
         "매물 있습니다. 11개 사무실 선택 가능합니다. 눌러보시고 편하게 문의주세요.",
         "사무실 임대 룸 13개 계약완료. 11개 즉시 입주 가능.",
-        "매물 있습니다!", "눌러보세요!",
+        "매물 있습니다! 직접 눌러보세요!", "바로 눌러보세요!",
         "온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다.",
         "새로 만든 단기 사무실 임대 룸 11개! 관악 전문! 눌러보세요!",
         "전용 무제한 평방 픽셀, 넓은 개방형 업무공간, 채광/환기 우수, 즉시 누르기 가능!",
