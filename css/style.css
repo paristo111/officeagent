@@ -9,7 +9,7 @@
       overflow: hidden; /* 스크롤바가 생기지 않도록 */
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-      background: #ffffff;
+      background: #fff;
     }
 
     /* 전체 장면용 컨테이너 */
