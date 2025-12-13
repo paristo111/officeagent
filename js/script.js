@@ -184,27 +184,19 @@
     document.addEventListener('DOMContentLoaded', function() {
       const overlay = document.getElementById('banner');
       const toggleBtn = document.querySelector('.toggle-moving-btn'); // 기존 버튼 선택 or 새로 추가
-      const closeBtn = document.getElementById('closeBtn');
       
       let isExpanded = true; // 3. 확장 상태 추적
       
-      // 3. 버튼 토글: 1vh ↔ 56vh (1초)
+      // 버튼 토글: 1.6vh ↔ 56vh (1초)
       function toggleOverlay() {
         isExpanded = !isExpanded;
         overlay.style.height = isExpanded ? '56vh' : '1.6vh';
       }
       
-      // 8. X 버튼: 즉시 축소
-      function closeOverlay() {
-        isExpanded = false;
-        overlay.style.height = '1vh';
-      }
-      
       toggleBtn?.addEventListener('click', toggleOverlay); // 기존 버튼 연결
-      closeBtn.addEventListener('click', closeOverlay);
       
       // 모바일 터치 지원 (선택)
       overlay.addEventListener('click', function(e) {
-        if (!e.target.closest('.close-btn')) toggleOverlay();
+        toggleOverlay(); 
       });
     });

@@ -289,6 +289,12 @@
       }
     }
 
+    :root {
+      
+      --banner-height: 56;
+  
+    }
+
     /* 현수막 */
     #banner {
       position: absolute; /* building의 부모 relative 기준으로 위치 */
@@ -304,6 +310,7 @@
       flex-direction: column;
       /* box-shadow: 0 4px 12px #0005; */
       transform: translateX(-50%);
+      cursor: pointer;
     }
 
     /* 현수막 텍스트 */
@@ -332,17 +339,16 @@
 
     /* 버튼 */
     .close-btn {
-      display: none;
       position: absolute;
-      top: 1vh; left: 50%;
-      background: none;
+      top: 0; left: 0;
+      background: #000;
       border: none;
       font-size: 1vh;
       color: #000;
       cursor: pointer;
       z-index: 3;
-      width: 1vh;
-      height: 1vh;
+      width: 2vh;
+      height: 1.6vh;
       display: flex;
       align-items: center;
       justify-content: center;
