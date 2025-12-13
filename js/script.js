@@ -190,7 +190,7 @@
       // 버튼 토글: 1.6vh ↔ 56vh (1초)
       function toggleOverlay() {
         isExpanded = !isExpanded;
-        overlay.style.height = isExpanded ? '56.2vh' : '1.6vh';
+        overlay.style.height = isExpanded ? '56vh' : '1.6vh';
       }
       
       toggleBtn?.addEventListener('click', toggleOverlay); // 기존 버튼 연결
