@@ -294,6 +294,54 @@
         transform: translateX(calc(-100vw - 100%));
       }
     }
+
+    /* 1-2. 초기 사각형: 20vh x 2vh, building 앞 완전 가림 */
+    #movingOverlay {
+      position: absolute; /* building의 부모 relative 기준으로 위치 */
+      top: 22.5vh; left: 50%; /* building 앞에 정확히 위치 조정 필요 */
+      width: 16vw; /* 2. 가로 20vh -> vw로 반응형 조정 */
+      height: 56vh; /* 2. 세로 2vh */
+      border: 1px solid #000;
+      background: #fff;
+      z-index: 1000; /* building 위에 표시 */
+      overflow: hidden; /* 6-7. 텍스트 잘림 효과 */
+      transition: height 0.75s ease-in-out; /* 3,8. 1초 애니메이션 */
+      display: flex;
+      flex-direction: column;
+      /* box-shadow: 0 4px 12px rgba(0,0,0,0.3); */
+      transform: translateX(-50%);
+    }
+
+    /* 4,6. 텍스트: 사각형 변화 무시하고 고정 위치/크기 */
+    .overlay-text {
+      position: absolute;
+      padding: 1.2vh 0.6vh 1.2vh 1.2vh;
+      top: -0.6vh; left: 0;
+      font-size: 1.6vh; /* 고정 크기 */
+      line-height: 1.8;
+      white-space: pre-wrap; /* 텍스트 그대로 유지 */
+      z-index: 2;
+      pointer-events: none; /* 텍스트 클릭 방지 */
+    }
+
+    /* 9. 버튼: 오른쪽 상단 고정 */
+    .close-btn {
+      position: absolute;
+      top: 1vh; left: 50%;
+      background: none;
+      border: none;
+      font-size: 1vh;
+      color: #000;
+      cursor: pointer;
+      z-index: 3;
+      width: 1vh;
+      height: 1vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .close-btn:hover { color: #000; }
   </style>
 </head>
 <body>
@@ -560,6 +608,14 @@
         <div class="rooftop-d"></div>
       </div>
     </div> -->
+
+    <!-- 현수막 -->
+    <div class="moving-office-overlay" id="movingOverlay">
+      <!-- 텍스트 -->
+      <div class="overlay-text">온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다. 온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다. 온라인 무빙 오피스입니다. 오프라인 무빙 오피스는 12월 19일부터 12월 21일까지 서울대학교 49동, 디자인연구동에서 진행됩니다.</div>
+    <!-- 닫기 버튼 -->
+    <button class="close-btn" id="closeBtn"></button>
+</div>
   </div>
 
   <script>
@@ -743,6 +799,35 @@
 
     // 기능 시작
     initFloatingTexts();
+
+    // 현수막, DOM 로드 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      const overlay = document.getElementById('movingOverlay');
+      const toggleBtn = document.querySelector('.toggle-moving-btn'); // 기존 버튼 선택 or 새로 추가
+      const closeBtn = document.getElementById('closeBtn');
+      
+      let isExpanded = true; // 3. 확장 상태 추적
+      
+      // 3. 버튼 토글: 1vh ↔ 56vh (1초)
+      function toggleOverlay() {
+        isExpanded = !isExpanded;
+        overlay.style.height = isExpanded ? '56vh' : '1vh';
+      }
+      
+      // 8. X 버튼: 즉시 축소
+      function closeOverlay() {
+        isExpanded = false;
+        overlay.style.height = '1vh';
+      }
+      
+      toggleBtn?.addEventListener('click', toggleOverlay); // 기존 버튼 연결
+      closeBtn.addEventListener('click', closeOverlay);
+      
+      // 모바일 터치 지원 (선택)
+      overlay.addEventListener('click', function(e) {
+        if (!e.target.closest('.close-btn')) toggleOverlay();
+      });
+    });
   </script>
 </body>
 </html>
