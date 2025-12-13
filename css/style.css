@@ -333,13 +333,6 @@
 
     /* 눌러보세요! */
     .banner-text-click {
-      position: absolute;
-      top: 52vh; left: 50%;
-      font-size: 1.6vh; /* 고정 크기 */
-      line-height: 1.8;
-      white-space: pre-wrap; /* 텍스트 그대로 유지 */
-      transform: translateX(-50%);
-      z-index: 2;
-      pointer-events: none; /* 텍스트 클릭 방지 */
+      text-align: center;
     }
 
