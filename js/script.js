@@ -181,7 +181,7 @@
 
     // 현수막, DOM 로드 후 실행
     document.addEventListener('DOMContentLoaded', function() {
-      const overlay = document.getElementById('movingOverlay');
+      const overlay = document.getElementById('banner');
       const toggleBtn = document.querySelector('.toggle-moving-btn'); // 기존 버튼 선택 or 새로 추가
       const closeBtn = document.getElementById('closeBtn');
       

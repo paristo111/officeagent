@@ -290,11 +290,11 @@
     }
 
     /* 현수막 */
-    #movingOverlay {
+    #banner {
       position: absolute; /* building의 부모 relative 기준으로 위치 */
       top: 22.5vh; left: 50%; /* building 앞에 정확히 위치 조정 필요 */
-      width: 22vh; /* 2. 가로 20vh -> vw로 반응형 조정 */
-      height: 56vh; /* 2. 세로 2vh */
+      width: 22vh; /* 2. 가로 20vh -> vh로 반응형 조정 */
+      height: 56vh; /* 2. 세로 1vh */
       border: 1px solid #000;
       background: #fff;
       z-index: 1000; /* building 위에 표시 */
@@ -307,7 +307,7 @@
     }
 
     /* 현수막 텍스트 */
-    .overlay-text {
+    .banner-text {
       position: absolute;
       padding: 1.2vh 0.6vh 1.2vh 1.2vh;
       top: -0.6vh; left: 0;
@@ -319,7 +319,7 @@
     }
 
     /* 눌러보세요! */
-    .overlay-text-close {
+    .banner-text-close {
       position: absolute;
       top: 52vh; left: 50%;
       font-size: 1.6vh; /* 고정 크기 */
