@@ -191,7 +191,7 @@
       // 3. 버튼 토글: 1vh ↔ 56vh (1초)
       function toggleOverlay() {
         isExpanded = !isExpanded;
-        overlay.style.height = isExpanded ? '56vh' : '1vh';
+        overlay.style.height = isExpanded ? '56vh' : '1.6vh';
       }
       
       // 8. X 버튼: 즉시 축소
