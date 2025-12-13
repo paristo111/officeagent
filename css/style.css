@@ -39,7 +39,7 @@
     .rooftop-container {
       position: absolute;
       left: 50%;
-      bottom: 85.0vh;
+      bottom: 80.0vh;
       width: 25vh;
       border: none;
       background: #f00;
@@ -325,8 +325,19 @@
       pointer-events: none; /* 텍스트 클릭 방지 */
     }
 
+    /* 이름 */
+    .banner-text-name {
+      position: absolute;
+      top: 44vh; right: 1vh;
+      font-size: 1.6vh; /* 고정 크기 */
+      line-height: 1.8;
+      white-space: pre-wrap; /* 텍스트 그대로 유지 */
+      z-index: 2;
+      pointer-events: none; /* 텍스트 클릭 방지 */
+    }
+
     /* 눌러보세요! */
-    .banner-text-close {
+    .banner-text-click {
       position: absolute;
       top: 52vh; left: 50%;
       font-size: 1.6vh; /* 고정 크기 */
@@ -337,21 +348,3 @@
       pointer-events: none; /* 텍스트 클릭 방지 */
     }
 
-    /* 버튼 */
-    .close-btn {
-      position: absolute;
-      top: 0; left: 0;
-      background: #000;
-      border: none;
-      font-size: 1vh;
-      color: #000;
-      cursor: pointer;
-      z-index: 3;
-      width: 2vh;
-      height: 1.6vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s;
-    }
-    .close-btn:hover { color: #000; }
