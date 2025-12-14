@@ -305,7 +305,7 @@
       background: #fff;
       z-index: 1000; /* building 위에 표시 */
       overflow: hidden; /* 6-7. 텍스트 잘림 효과 */
-      transition: height 0.75s ease-in-out; /* 3,8. 1초 애니메이션 */
+      transition: height 2s ease-in-out; /* 3,8. 1초 애니메이션 */
       display: flex;
       flex-direction: column;
       /* box-shadow: 0 4px 12px #0005; */
