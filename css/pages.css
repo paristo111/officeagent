@@ -1,0 +1,164 @@
+   body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffffff; /* 우주 같은 어두운 배경 */
+            color: rgb(0, 0, 0);
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        /* 1. 3D 공간을 바라보는 카메라 역할 */
+        .scene {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px; /* 원근감 깊이 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 2. 모든 평면을 담고 있는 월드 (회전체) */
+        .world {
+            position: relative;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d; /* 자식 요소들의 3D 속성 유지 */
+            transform: rotateX(-20deg) rotateY(45deg); /* 초기 각도 */
+            transition: transform 0.1s ease-out; /* 부드러운 움직임 */
+        }
+
+        /* 3. 공통 평면 스타일 */
+        .plane {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw; /* 화면을 꽉 채우기 위해 매우 크게 설정 */
+            height: 100vh;
+            transform-origin: center center;
+            /* 그리드 패턴 (모눈종이 느낌) */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-color: rgba(255, 255, 255, 0);
+            border: 1px solid rgba(255, 255, 255, 0);
+            
+            /* 텍스트 배치 및 스타일 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            pointer-events: none; /* 마우스 이벤트 통과 */
+        }
+
+        /* 각 평면의 축 텍스트 표시용 */
+        .axis-label {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        #nameTop{
+            top: 30px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        #titleBottom{
+            bottom: 30px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        #textB{
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+        }           
+        #imgB{
+            top: 50%;
+            left: 30px;
+            transform: translateY(-50%);
+        }
+        /* --- 평면별 배치 --- */
+
+        /* XY 평면 (Z축 기준 평면 - 정면) */
+        .plane-xy {
+            transform: translate(-50%, -50%);
+        /* border: 2px solid rgba(0, 0, 255, 0.5); 파란색 테두리 */
+        }
+        
+        /* YZ 평면 (X축 기준 평면 - 측면) */
+        .plane-yz {
+            transform: translate(-50%, -50%) rotateY(90deg);
+           /*  border: 2px solid rgba(255, 0, 0, 0.5); 빨간색 테두리 */
+        }
+
+        /* ZX 평면 (Y축 기준 평면 - 바닥/천장) */
+        .plane-zx {
+            transform: translate(-50%, -50%) rotateX(90deg);
+           /*  border: 2px solid rgba(0, 255, 0, 0.5); /* 초록색 테두리 */
+        }
+
+        /* --- 텍스트를 쓸 수 있는 영역 예시 --- */
+        .content {
+            background: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* 안내 문구 */
+        .instruction {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #000000;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 100;
+        }
+        #1st{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+        }
+        #explain{
+            position: relative;
+            top: 10vh;
+            left: 10vw;
+            text-align: left;
+        
+        .content{
+            position: absolute;
+            width: 30vw;
+            height: 20vw;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        }
+        img {
+            width: 80%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }        
+        #img1 {
+            position: absolute;
+            width: 60vw;
+            height:70vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url('/img/jiwon/instant magazine web.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
