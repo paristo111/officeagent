@@ -1,7 +1,7 @@
     // ------------------------------------------
     // 사람(작은 사각형) 10명을 만들어 땅 위에서 걷게 하기
     // ------------------------------------------
-    const PEOPLE_COUNT = 13;
+    const PEOPLE_COUNT = 16;
     const PERSON_WIDTH = 5; // CSS .person width와 동일하게 유지
     const persons = [];
     const scene = document.getElementById("scene");
