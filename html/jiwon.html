@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
     <script defer src="/js/pages.js"></script>
     <script defer src="/js/jiwon-dj.js"></script>
-    <title>둘러보시고 
-편하게 
-문의주세요! 
-(매물 있습니다)</title>
-   
-</head>
-<body>
+    <title>둘러보시고
+        편하게
+        문의주세요!
+        (매물 있습니다)</title>
 
     <a href="/index.html" class="fixed-label" id="arrow" > <img src="/img/arrow.png" alt=""> </a>
     <div class="fixed-label" id="nameBottom">박지원</div>
@@ -23,10 +21,41 @@
     <div class="scene">
         <div class="world" id="world">
             
-	            <div class="plane plane-xy">
-	                <div class="plane-face plane-front">
-	                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
-	                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
+            <div class="plane plane-xy">
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive" data-rotate="text" id="textB">텍스트</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">이미지</div>
+                    
+                    <div class="content">
+                            <div id="img1">
+                            <img src="/img/jiwon/instant magazine web.webp" alt="jiwon 대표 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="plane-face plane-back">
+                    <div class="content back-content">
+                        <div class="dj-panel" id="djPanel">
+                            <div class="dj-panel__header">
+                                <p class="dj-panel__tag">office dj mode</p>
+                                <h2>텍스트 기반 즉석 사운드</h2>
+                                <p class="dj-panel__lead">
+                                    앞면 텍스트(#explain)를 분석해 매물의 분위기에 맞는 루프를 자동 믹싱합니다.
+                                </p>
+                            </div>
+                            <div class="dj-panel__summary" id="djSummary">텍스트를 불러오는 중...</div>
+                            <div class="dj-panel__meta" id="djDetails"></div>
+                            <div class="dj-panel__controls">
+                                <button id="djPlay" class="dj-btn primary">음악 재생</button>
+                                <button id="djShuffle" class="dj-btn">다시 믹스</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="plane plane-yz">
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">-Z Back</div>
+                    <div class="axis-label interactive" data-rotate="image" style="top: 50%; left: 10px;">title</div>
 
 	                    <div class="content">
 	                        <div id="img1">
@@ -85,6 +114,7 @@
 
     <!-- <div class="instruction">마우스를 클릭하고 드래그하여 공간을 회전시켜 보세요.</div> -->
 
-  
+
 </body>
+
 </html>
