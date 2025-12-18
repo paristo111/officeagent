@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7f7fd5" />
+      <stop offset="100%" stop-color="#86a8e7" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#grad2)" rx="28" />
+  <text x="50%" y="50%" font-size="64" fill="#fff" font-family="'Pretendard', 'Noto Sans KR', sans-serif" text-anchor="middle" dominant-baseline="middle">Gallery B</text>
+</svg>

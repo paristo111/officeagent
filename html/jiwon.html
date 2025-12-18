@@ -15,28 +15,9 @@
 </head>
 <body>
 
-    <div class="fixed-label" id="nameTop">박지원</div>
-    <div class="fixed-label" id="titleBottom">instant magazine</div>
+    <div class="fixed-label" id="nameBottom">박지원</div>
+    <div class="fixed-label" id="titleTop">instant magazine</div>
 
-    <div class="axis-widget" aria-label="3D navigation">
-        <div class="axis-indicator" id="axisIndicator">
-            <div class="axis-visual" id="axisVisual">
-                <div class="axis-core"></div>
-                <div class="axis-line axis-line-title"></div>
-                <div class="axis-line axis-line-text"></div>
-                <div class="axis-line axis-line-image"></div>
-            </div>
-            <div class="axis-nav axis-nav-title">
-                <button type="button" class="axis-nav-btn" data-rotate="title" data-rotate-mode="absolute">TITLE</button>
-            </div>
-            <div class="axis-nav axis-nav-text">
-                <button type="button" class="axis-nav-btn" data-rotate="text" data-rotate-mode="absolute">TEXT</button>
-            </div>
-            <div class="axis-nav axis-nav-image">
-                <button type="button" class="axis-nav-btn" data-rotate="image" data-rotate-mode="absolute">IMAGE</button>
-            </div>
-        </div>
-    </div>
 
     <div class="scene">
         <div class="world" id="world">
@@ -47,7 +28,9 @@
                     <div class="axis-label interactive" data-rotate="image" id="imgB">이미지</div>
                     
                     <div class="content">
-                        <div id="img1" img src="/img/jiwon/instant magazine web.webp"></div>
+                            <div id="img1">
+                            <img src="/img/jiwon/instant magazine web.webp" alt="jiwon 대표 이미지">
+                        </div>
                     </div>
                 </div>
                 <div class="plane-face plane-back">
@@ -84,7 +67,6 @@
 위치: 서울대학교 49동12층 건물<br>
 준공일: 1999년 (내부 인테리어 리모델링이 완료되어 깔끔합니다.)<br>
 현재 총11세대 빈 전세 매물 있습니다.<br>
-<br><br>
 [필수 입주요건]<br>
 소속과 전공 상관 무관합니다.<br>
 임대 장소는 49동 내 총 12층 24개 호실 입니다.<br>
@@ -94,17 +76,45 @@
                 </div>
                 </div>
                 <div class="plane-face plane-back">
-                    <div class="content back-content">
-                           <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">></div>
+                    <div class="content back-content" id ="imagesContainer">
+                           <!-- <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">></div> -->
                     <div class="axis-label interactive" data-rotate="image" style="top: 50%; left: 10px;"><</div>
-
-                        <h2>LEASING NOTES</h2>
+                        <div id="img2" class="image-card">
+                            <img src="/img/jiwon/instant magazine web.webp" alt="추가 이미지 1">
+                        </div>
+              
+                        <!-- <h2>LEASING NOTES</h2>
                         <p>뒷면에는 조건 정리, 문의 버튼 등 다른 인터랙션을 배치할 수 있습니다.</p>
                         <ul>
                             <li>입주 절차 단계별 안내</li>
                             <li>상담 예약 링크</li>
                             <li>담당자 연락처</li>
-                        </ul>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+            <div class="plane plane-yz plane-yz-offset-left">
+                <div class="plane-face plane-front">
+                    <div class="axis-label" style="top: 10px; left: 30px;">YZ-L</div>
+                </div>
+                <div class="plane-face plane-back">
+                    <div class="content back-content">
+                        <div class="image-card">
+                            <img src="/img/jiwon/instant magazine web.webp" alt="추가 이미지 L">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plane plane-yz plane-yz-offset-right">
+                <div class="plane-face plane-front">
+                    <div class="axis-label" style="top: 10px; right: 30px;">YZ-R</div>
+                </div>
+                <div class="plane-face plane-back">
+                    <div class="content back-content">
+                        <div class="image-card">
+                            <img src="/img/jiwon/instant magazine web.webp" alt="추가 이미지 R">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,7 +130,6 @@
                     (바닥/천장 공간)
                 </div>
             </div>
-
         </div>
     </div>
 

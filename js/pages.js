@@ -1,44 +1,29 @@
-
 // window.onload: 화면의 모든 요소(HTML, CSS 등)가 다 로딩된 후에 실행하라는 뜻입니다.
 window.onload = function() {
-    
     const world = document.getElementById('world');
-    const axisVisual = document.getElementById('axisVisual');
-    const axisPins = document.querySelectorAll('.axis-pin');
     const presetTriggers = document.querySelectorAll('[data-rotate]');
-    
-    // 안전장치: 만약 world를 못 찾았다면 에러를 띄우고 멈춥니다.
+
     if (!world) {
         console.error("에러: 'world' 아이디를 가진 요소를 찾을 수 없습니다.");
-        return; 
+        return;
     }
 
     let isDragging = false;
-    let startX, startY;
+    let startX;
+    let startY;
     let rotateX = 0;
     let rotateY = 0;
 
     const applyRotation = () => {
         const transformValue = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         world.style.transform = transformValue;
-        if (axisVisual) {
-            axisVisual.style.transform = transformValue;
-        }
-        axisPins.forEach((pin) => {
-            pin.style.setProperty('--axis-facing', `rotateY(${-rotateY}deg) rotateX(${-rotateX}deg)`);
-        });
     };
+
+    const randomRange = (min, max) => Math.random() * (max - min) + min;
 
     const rotateSteps = {
-        text: -90,  // 텍스트 버튼은 오른쪽(시계방향)으로 90도
-        image: 90   // 이미지 버튼은 왼쪽(반시계방향)으로 90도
-    };
-
-    const absoluteAngles = {
-        title: 0,
         text: -90,
-        image: 90,
-        bgm: 180
+        image: 90
     };
 
     const rotateRelative = (preset) => {
@@ -49,42 +34,31 @@ window.onload = function() {
         applyRotation();
     };
 
-    const rotateToPreset = (preset) => {
-        const target = absoluteAngles[preset];
-        if (target === undefined) return;
-        rotateX = 0;
-        rotateY = target;
-        applyRotation();
-    };
-
     applyRotation();
 
-    // 마우스 클릭
-    document.addEventListener('mousedown', function(e) {
+    document.addEventListener('mousedown', (event) => {
         isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
+        startX = event.clientX;
+        startY = event.clientY;
         document.body.style.cursor = 'grabbing';
     });
 
-    // 마우스 이동
-    document.addEventListener('mousemove', function(e) {
+    document.addEventListener('mousemove', (event) => {
         if (!isDragging) return;
 
-        const deltaX = e.clientX - startX;
-        const deltaY = e.clientY - startY;
+        const deltaX = event.clientX - startX;
+        const deltaY = event.clientY - startY;
 
         rotateY += deltaX * 0.5;
         rotateX -= deltaY * 0.5;
 
         applyRotation();
 
-        startX = e.clientX;
-        startY = e.clientY;
+        startX = event.clientX;
+        startY = event.clientY;
     });
 
-    // 마우스 뗌
-    document.addEventListener('mouseup', function() {
+    document.addEventListener('mouseup', () => {
         isDragging = false;
         document.body.style.cursor = 'default';
     });
@@ -92,17 +66,70 @@ window.onload = function() {
     presetTriggers.forEach((element) => {
         const preset = element.dataset.rotate;
         if (!preset) return;
+
         element.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
             isDragging = false;
             document.body.style.cursor = 'default';
-            const mode = element.dataset.rotateMode || 'relative';
-            if (mode === 'absolute') {
-                rotateToPreset(preset);
-            } else {
-                rotateRelative(preset);
-            }
+            rotateRelative(preset);
         });
     });
-};
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const placeImageInRange = (container, card, minRatio, maxRatio) => {
+        if (!container || !card) return;
+
+        const width = container.clientWidth || 800;
+        const height = container.clientHeight || 500;
+        const aspectRatio = 4 / 3;
+        const cardWidth = card.offsetWidth || width * 0.28;
+        const cardHeight = cardWidth / aspectRatio;
+
+        const minX = width * minRatio;
+        const maxX = Math.max(minX, width * maxRatio - cardWidth);
+        const jitterX = Math.max(width * 0.02, 12);
+        const jitterY = Math.max(height * 0.05, 14);
+        const centerY = height * 0.5;
+
+        let left = randomRange(minX, maxX) + randomRange(-jitterX, jitterX);
+        let top = centerY - cardHeight / 2 + randomRange(-jitterY, jitterY);
+
+        left = clamp(left, 0, width - cardWidth);
+        top = clamp(top, 0, height - cardHeight);
+
+        card.style.left = `${left}px`;
+        card.style.top = `${top}px`;
+    };
+
+    const scatterImagesOnBack = () => {
+        const container = document.getElementById('imagesContainer');
+        if (!container) return;
+
+        requestAnimationFrame(() => {
+            // 중앙 YZ 평면: 가로 34~66%
+            const mainCard = container.querySelector('#img2');
+            placeImageInRange(container, mainCard, 0.34, 0.66);
+
+            // 좌측 YZ 평면: 5~33%
+            const leftPlane = document.querySelector('.plane-yz-offset-left');
+            if (leftPlane) {
+                const leftContainer = leftPlane.querySelector('.back-content');
+                const leftCard = leftPlane.querySelector('.image-card');
+                placeImageInRange(leftContainer, leftCard, 0.05, 0.33);
+            }
+
+            // 우측 YZ 평면: 67~95%
+            const rightPlane = document.querySelector('.plane-yz-offset-right');
+            if (rightPlane) {
+                const rightContainer = rightPlane.querySelector('.back-content');
+                const rightCard = rightPlane.querySelector('.image-card');
+                placeImageInRange(rightContainer, rightCard, 0.67, 0.95);
+            }
+        });
+    };
+
+    scatterImagesOnBack();
+    window.addEventListener('resize', scatterImagesOnBack);
+}

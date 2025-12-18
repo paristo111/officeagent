@@ -1,10 +1,31 @@
-   body {
+
+
+
+
+@font-face {
+    font-family:"ABC Whyte Hangul Inktrap";
+    src: url("../font/ABCWhyteHangulInktrap-Regular-Trial.otf");
+}
+
+@font-face {
+    font-family:"pretendard bold";
+    src: url("../font/Pretendard-Bold.woff");
+}
+
+
+@font-face {
+    font-family:"Pretendard-Regular";
+    src: url("../font/Pretendard-Regular.woff");
+}
+
+body {
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: #ffffff; /* 우주 같은 어두운 배경 */
             color: rgb(0, 0, 0);
-            font-family: 'Pretendard', sans-serif;
+            
+          font-family:"pretendard-regular", sans-serif;
         }
 
         /* 1. 3D 공간을 바라보는 카메라 역할 */
@@ -18,184 +39,25 @@
         }
 
         .fixed-label {
+        font-family:"pretendard bold";
             position: fixed;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.2rem;
             color: #000;
             z-index: 150;
             pointer-events: none;
         }
 
-        #nameTop {
-            top: 30px;
-        }
-
-        #titleBottom {
+        #nameBottom {
             bottom: 30px;
         }
 
-        .axis-widget {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 200px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 160;
-            pointer-events: auto;
-            perspective: 900px;
-            background: none;
-            border-radius: 16px;
-            /* box-shadow: 0 12px 25px rgba(0,0,0,0.15); */
+        #titleTop {
+            top: 30px;
         }
-
-        .axis-indicator {
-            position: relative;
-            width: 110px; 
-            height: 110px;
-        }
-
-        .axis-visual {
-            position: relative;
-            width: 110px; 
-            height: 110px;
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-        }
-
-        .axis-core {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 8px;
-            height: 8px;
-            background: rgba(0,0,0,0.65);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 8px rgba(0,0,0,0.3);
-        }
-
-        .axis-arm {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: rgba(0,0,0,0.45);
-            transform-origin: center center;
-        }
-
-        .axis-arm::before,
-        .axis-arm::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid rgba(0,0,0,0.45);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-        }
-
-        .axis-arm-x {
-            width: 140px;
-            height: 2px;
-            transform: translate(-50%, -50%);
-        }
-
-        .axis-arm-x::before {
-            transform: translate(-65px, -50%);
-        }
-
-        .axis-arm-x::after {
-            transform: translate(65px, -50%);
-        }
-
-        .axis-arm-z {
-            width: 2px;
-            height: 140px;
-            transform: translate(-50%, -50%);
-        }
-
-        .axis-arm-z::before {
-            transform: translate(-50%, -65px);
-        }
-
-        .axis-arm-z::after {
-            transform: translate(-50%, 65px);
-        }
-
-        .axis-node {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border: none;
-            background: none;
-            padding: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform-style: preserve-3d;
-            pointer-events: auto;
-            --axis-color: rgba(0,0,0,0.6);
-        }
-
-        .axis-node__label {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3px 10px;
-            border-radius: 999px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.08rem;
-            color: #fff;
-            background: var(--axis-color);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
-            pointer-events: none;
-            min-width: 52px;
-            justify-content: center;
-        }
-
-        .axis-node-text {
-            transform: translate(-50%, -50%) translateX(80px);
-            --axis-color: #d32f2f;
-        }
-
-        .axis-node-image {
-            transform: translate(-50%, -50%) translateX(-80px);
-            --axis-color: #1976d2;
-        }
-
-        .axis-node-title {
-            transform: translate(-50%, -50%) translateY(-80px);
-            --axis-color: #2e7d32;
-        }
-
-        .axis-node-bgm {
-            transform: translate(-50%, -50%) translateY(80px);
-            --axis-color: #8e24aa;
-        }
-
-        /* .axis-nav-title .axis-nav-btn {
-            background: rgba(0,0,0,0.85);
-        }
-
-        .axis-nav-text .axis-nav-btn {
-            background: rgba(255,112,67,0.85);
-        }
-
-        .axis-nav-image .axis-nav-btn {
-            background: rgba(66,165,245,0.85);
-        } */
-
 
         /* 2. 모든 평면을 담고 있는 월드 (회전체) */
         .world {
@@ -264,10 +126,14 @@
     background: rgba(255, 255, 255, 0.85);
     color: #000;
     padding: 30px;
-    border-radius: 12px;
-    max-width: 420px;
+    /* border-radius: 12px; */
+    max-width: 100vw;
+    width: min(80vw, 520px);
+    height: 100vh;   
     text-align: left;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    /* box-shadow: 0 10px 25px rgba(0,0,0,0.2); */
+    position: absolute;
+    overflow: visible;
 }
 
 .dj-panel {
@@ -336,10 +202,10 @@
         /* 각 평면의 축 텍스트 표시용 */
         .axis-label {
             position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.8;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-            pointer-events: none;
+            font-size: 1.3rem;
+               font-family:"pretendard bold";
+            /* text-shadow: 0 0 10px rgba(0,0,0,0.8); */
+            pointer-events: click;
         }
 
         .axis-label.interactive {
@@ -365,11 +231,27 @@
         /* border: 2px solid rgba(0, 0, 255, 0.5); 파란색 테두리 */
         }
         
-        /* YZ 평면 (X축 기준 평면 - 측면) */
-        .plane-yz {
-            transform: translate(-50%, -50%) rotateY(90deg);
-           /*  border: 2px solid rgba(255, 0, 0, 0.5); 빨간색 테두리 */
-        }
+/* YZ 평면 (X축 기준 평면 - 측면) */
+.plane-yz {
+    transform: translate(-50%, -50%) rotateY(90deg);
+   /*  border: 2px solid rgba(255, 0, 0, 0.5); 빨간색 테두리 */
+}
+.plane-yz-offset-left {
+    transform: translate(calc(-50% - 15vw), -50%) rotateY(90deg);
+    z-index: 100;
+}
+
+.plane-yz-offset-right {
+    transform: translate(calc(-50% + 10vw), -50%) rotateY(90deg);
+}
+.plane-yz .back-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70vw;
+    height: 65vh;
+    transform: translate(-50%, -50%);
+}
 
         /* ZX 평면 (Y축 기준 평면 - 바닥/천장) */
         .plane-zx {
@@ -379,9 +261,15 @@
 
         /* --- 텍스트를 쓸 수 있는 영역 예시 --- */
         .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0);
-            padding: 20px;
-            border-radius: 10px;
+            font-size: 1.3rem;
+            padding: 0%;
+            width: 40vw;
+            /* border-radius: 10px; */
             text-align: center;
         }
 
@@ -396,6 +284,7 @@
             pointer-events: none;
             z-index: 100;
         }
+        
         #1st{
             position: absolute;
             top: 10px;
@@ -405,25 +294,67 @@
             color: rgb(0, 0, 0);
         }
         #explain{
-            position: relative;
+            /* position: relative;
             top: 10vh;
-            left: 10vw;
+            left: 10vw; */
             text-align: left;
-        
-        .content{
-            position: absolute;
-            width: 30vw;
-            height: 20vw;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
+#imagesContainer {
+    position: absolute;
+    width: 85vw;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
         
-        }
+#img2 {
+    position: absolute;
+    width: clamp(180px, 26vw, 300px);
+    aspect-ratio: 4 / 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    /* border-radius: 12px; */
+    overflow: hidden;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.2s ease;
+}
+
+#img2:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    z-index: 20;
+}
+
+#img2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-card {
+    position: absolute;
+    width: clamp(200px, 26vw, 320px);
+    aspect-ratio: 4 / 3;
+    /* border-radius: 14px; */
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
         img {
-            width: 80%;
+            max-width: 100%;
             height: auto;
-            border-radius: 15px;
+            border-radius: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }        
         #img1 {
@@ -433,9 +364,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-image: url('/img/jiwon/instant magazine web.webp');
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        #img1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
