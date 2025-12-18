@@ -121,6 +121,26 @@
       padding: 0 20px;
       word-break: keep-all;
     }
+
+    /* [6] 추가된 WEB 링크 스타일 */
+    .web-link {
+      display: inline-block;
+      margin-top: 30px; /* 텍스트와 간격 */
+      color: #2f00fe;
+      font-weight: bold;
+      font-size: 14px; /* 조금 더 크게 */
+      text-decoration: none;
+      border-bottom: 1px solid #2f00fe; /* 밑줄 커스텀 */
+      transition: all 0.2s;
+    }
+
+    .web-link:hover {
+      color: #6456ff;
+      border-bottom-color: transparent;
+      /* 호버 시 주변이 빛나는 효과 (다른 버튼과 통일) */
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ccc; 
+    }
+
   </style>
 </head>
 
@@ -163,7 +183,10 @@
 세상을 계산해서 그려보자.
 <br><br>
 육각형으로, 사각형으로.
-
+<br><br>
+<a href="https://keepon-cho.github.io/keep-on-drawing/" target="_blank" class="web-link">
+  WEB
+</a>
   </div>
 
   <script>

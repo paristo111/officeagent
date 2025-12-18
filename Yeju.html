@@ -131,6 +131,26 @@
       /* 모바일에서 글자가 화면 끝에 붙지 않도록 안전 여백 */
       word-break: keep-all;
       /* 단어 단위 줄바꿈 */
+
+      /* [6] 추가된 WEB 링크 스타일 */
+    .web-link {
+      display: inline-block;
+      margin-top: 30px; /* 텍스트와 간격 */
+      color: #2f00fe;
+      font-weight: bold;
+      font-size: 14px; /* 조금 더 크게 */
+      text-decoration: none;
+      border-bottom: 1px solid #2f00fe; /* 밑줄 커스텀 */
+      transition: all 0.2s;
+    }
+
+    .web-link:hover {
+      color: #6456ff;
+      border-bottom-color: transparent;
+      /* 호버 시 주변이 빛나는 효과 (다른 버튼과 통일) */
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ccc; 
+    }
+
     }
   </style>
 </head>
@@ -180,6 +200,10 @@
     이 작업은 함께 있다는 사실이 어떻게 감각이 되는지 묻습니다.
     보이지 않는 존재들이 쌓이면서 공간의 온도가 달라지는 것처럼,
     온라인의 ‘사람 수’는 불꽃으로 번역되어 지금 이곳의 밀도를 기록합니다.
+    <br><br>
+    <a href="https://cyberfirepla.web.app/" target="_blank" class="web-link">
+      WEB
+    </a>
   </div>
 
   <script>

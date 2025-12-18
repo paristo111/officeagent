@@ -121,13 +121,33 @@
       padding: 0 20px;
       word-break: keep-all;
     }
+
+     /* [6] 추가된 WEB 링크 스타일 */
+    .web-link {
+      display: inline-block;
+      margin-top: 30px; /* 텍스트와 간격 */
+      color: #2f00fe;
+      font-weight: bold;
+      font-size: 14px; /* 조금 더 크게 */
+      text-decoration: none;
+      border-bottom: 1px solid #2f00fe; /* 밑줄 커스텀 */
+      transition: all 0.2s;
+    }
+
+    .web-link:hover {
+      color: #6456ff;
+      border-bottom-color: transparent;
+      /* 호버 시 주변이 빛나는 효과 (다른 버튼과 통일) */
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ccc; 
+    }
+
   </style>
 </head>
 
 <body>
 
-  <div class="fixed-ui ui-top">Fishbowl of Echoes</div>
-  <div class="fixed-ui ui-bottom">한채빈</div>
+  <div class="fixed-ui ui-top">when-you-got-nothing-to-work-on-agent.</div>
+  <div class="fixed-ui ui-bottom">이정아</div>
 
   <div class="fixed-ui ui-left" onclick="location.href='/index.html'">
     OFFICE
@@ -166,6 +186,10 @@
 어디로 가야 할지 잠깐 헷갈리거나 초원 어딘가에서 잠시 헤매고 있다는 기분이 들 때 이곳에 들러보세요. 이 에이전트는 당신만을 위한 하나의 디자인 지시서를 조용히 건네줍니다. <br><br>
 
 길을 잃었다는 건 실패가 아니라, 잠시 다른 풀밭에 서 있다는 뜻일지도 모르니까요.
+
+<a href="when-you-got-nothing-to-work-on-agent.com" target="_blank" class="web-link">
+  WEB
+</a>
   </div>
 
   <script>

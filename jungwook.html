@@ -121,6 +121,26 @@
       padding: 0 20px;
       word-break: keep-all;
     }
+
+     /* [6] 추가된 WEB 링크 스타일 */
+    .web-link {
+      display: inline-block;
+      margin-top: 30px; /* 텍스트와 간격 */
+      color: #2f00fe;
+      font-weight: bold;
+      font-size: 14px; /* 조금 더 크게 */
+      text-decoration: none;
+      border-bottom: 1px solid #2f00fe; /* 밑줄 커스텀 */
+      transition: all 0.2s;
+    }
+
+    .web-link:hover {
+      color: #6456ff;
+      border-bottom-color: transparent;
+      /* 호버 시 주변이 빛나는 효과 (다른 버튼과 통일) */
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ccc; 
+    }
+
   </style>
 </head>
 
@@ -166,7 +186,10 @@
 자, 이제 상상력을 조금만 더 발휘해서, 화면의 '안쪽'으로 움직인다고 생각해 보자. 캔버스 너머로 완전히 벗어나는 방향이지. 만약 사각형이 위쪽으로 움직인다면, 아래쪽의 점들은 위쪽의 점들이 있던 자리를 통과해서
 움직여야겠지. 하지만 내 말은 사각형 안의 모든 점이 공간을 뚫고 안쪽으로 지나간다는 뜻이야. 어떤 점도 다른 점이 있던 자리를 통과하지 않고, 각 점이 저마다의 직선을 그리면서 말이지. 우리는 그것을 '깊이'라고
 부르네.
-
+<br><br>
+<a href="https://flatland1884.vercel.app/" target="_blank" class="web-link">
+  WEB
+</a>
   </div>
 
   <script>
