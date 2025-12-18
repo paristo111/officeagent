@@ -28,6 +28,16 @@ body {
           font-family:"pretendard-regular", sans-serif;
         }
 
+body.view-dj {
+    background: #000;
+    color: #fff;
+}
+
+body.view-dj .fixed-label,
+body.view-dj .axis-label {
+    color: #fff;
+}
+
         /* 1. 3D 공간을 바라보는 카메라 역할 */
         .scene {
             width: 100vw;
@@ -36,6 +46,8 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .fixed-label {
@@ -131,7 +143,6 @@ body {
     color: #000;
     padding: 30px;
     /* border-radius: 12px; */
-    max-width: min(80vw, 520px);
     width: 100%;
     max-height: 80vh;
     text-align: left;
@@ -141,7 +152,7 @@ body {
 }
 
 .dj-panel {
-    display: flex;
+    display: block;
     flex-direction: column;
     gap: 16px;
 }
@@ -170,7 +181,7 @@ body {
     background: #111;
     color: #fff;
     padding: 12px 14px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     line-height: 1.4;
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
@@ -186,10 +197,9 @@ body {
 }
 
 .dj-panel__code {
-    border-radius: 12px;
     overflow: hidden;
     background: #050505;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+
 }
 
 .dj-panel__code pre {
@@ -201,6 +211,97 @@ body {
     color: #e5e9f0;
     white-space: pre-wrap;
 }
+
+.dj-editor {
+    position: relative;
+    width: min(88vw, 980px);
+    height: min(68vh, 620px);
+    padding: 0;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.dj-editor__pre {
+    margin: 0;
+    height: 100%;
+    width: 100%;;
+    padding: 18px 20px;
+    overflow: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    tab-size: 2;
+    white-space: pre;
+}
+
+.dj-editor__pre code {
+    display: block;
+
+}
+
+.back-content--editor {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+   
+    max-height: none;
+    padding: 0;
+    background: transparent;
+
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-content--editor .dj-editor {
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+}
+
+.back-content--editor .dj-editor__pre {
+    color: #000;
+}
+
+body.view-dj .plane-xy .plane-back {
+    background: #000;
+}
+
+.dj-nav {
+    display: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dj-nav-left {
+    left: 30px;
+}
+
+.dj-nav-right {
+    right: 30px;
+}
+
+body.view-dj .dj-nav {
+    display: block;
+}
+
+body.view-dj .dj-editor,
+body.view-dj .back-content--editor .dj-editor {
+    color: #fff;
+    /* border-color: rgba(255, 255, 255, 0.18); */
+}
+
+body.view-dj .dj-editor__pre,
+body.view-dj .back-content--editor .dj-editor__pre {
+    color: #fff;
+}
+
 
 
         /* 각 평면의 축 텍스트 표시용 */
@@ -310,4 +411,31 @@ body {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            box-shadow: none;
         }
+
+body.view-dj .back-content--editor {
+    isolation: isolate;
+}
+
+body.view-dj .back-content--editor::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--dj-bg-image, none);
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: difference;
+    filter: grayscale(1) contrast(1.35) brightness(1.1);
+    opacity: 0.85;
+    transform: translateX(6%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 45%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, transparent 45%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,1) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.view-dj .back-content--editor > * {
+    position: relative;
+    z-index: 1;
+}

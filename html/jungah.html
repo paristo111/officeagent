@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/pages.css">
-    <script src="/js/pages.js"></script>
-    <title>둘러보시고 
-편하게 
-문의주세요! 
-(매물 있습니다)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <script defer src="/js/pages.js"></script>
+    <script defer src="/js/jiwon-dj.js"></script>
+    <title>이정아</title>
    
 </head>
 <body>
@@ -17,20 +16,29 @@
         <div class="world" id="world">
             
             <div class="plane plane-xy">
-
- 
-                <div class="axis-label" id="nameTop" >이정아</div>
-                <div class="axis-label" id="titleBottom" >instant magazine</div>
-                <div class="axis-label" id="textB" >텍스트-></div>
-                <div class="axis-label" id="imgB" ><-이미지</div>
-                
-                <div class="content">
-                                    <div id="img1">
-                            <img src="/img/jeonga/대표이미지_임시.png" alt="jeonga 대표 이미지">
+                <div class="plane-face plane-front">
+                    <div class="axis-label" id="nameTop" >이정아</div>
+                    <div class="axis-label" id="titleBottom" >when-you-got-nothing-to-work-on-agent.</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    
+                    <div class="content">
+                        <div id="img1">
+                            <img href="when-you-got-nothing-to-work-on-agent.com" src="/img/jungah/이미지01.png" alt="jeonga 대표 이미지">
                         </div>
-
-            </div>
+                    </div>
                 </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="back-content back-content--editor">
+                        <div class="dj-editor" aria-label="Office DJ code">
+                            <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="plane plane-yz">
                 <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
                 <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
@@ -40,18 +48,11 @@
                 <div class="content">
                   <div id="explain">
                   
-                   [매물 정보]<br>
-매물면적: 호수당 22.5cmX15cm<br>
-50w 6700K LED (전력 콘센트 옵션 포함)<br>
-위치: 서울대학교 49동12층 건물<br>
-준공일: 1999년 (내부 인테리어 리모델링이 완료되어 깔끔합니다.)<br>
-현재 총11세대 빈 전세 매물 있습니다.<br>
-<br><br>
-[필수 입주요건]<br>
-소속과 전공 상관 무관합니다.<br>
-임대 장소는 49동 내 총 12층 24개 호실 입니다.<br>
-입주 유예기간은 12월 15일 부터 17일입니다.<br>
-실 거주 기간은 12월 19일 부터 21일 (금,토,일) 입니다.<br>
+우리는 길을 잃은 디자이너들을 위한 작은 에이전트이자 잠시 방향을 놓친 어린 양들을 위한 느슨한 목자입니다. <br><br>
+
+어디로 가야 할지 잠깐 헷갈리거나 초원 어딘가에서 잠시 헤매고 있다는 기분이 들 때 이곳에 들러보세요. 이 에이전트는 당신만을 위한 하나의 디자인 지시서를 조용히 건네줍니다. <br><br>
+
+길을 잃었다는 건 실패가 아니라, 잠시 다른 풀밭에 서 있다는 뜻일지도 모르니까요.
                 </div>
             </div>
 
