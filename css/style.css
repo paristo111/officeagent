@@ -346,6 +346,7 @@
 
     /* 철거 */
     .redtape {
+      display: none;
       position: absolute;
       top: 3vh; 
       left: 50%;

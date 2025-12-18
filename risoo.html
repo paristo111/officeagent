@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOBILE OFFICE // EXHIBITION</title>
+  <style>
+    /* [1] 기본 설정 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* [2] 고정된 UI 요소 */
+    .fixed-ui {
+      position: fixed;
+      z-index: 9999;
+      font-family: monospace;
+      font-weight: bold;
+      color: #000;
+      user-select: none;
+      background-color: transparent;
+      padding: 5px;
+    }
+
+    /* 2-1. 상단 (제목) */
+    .ui-top {
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 2-2. 하단 (이름) */
+    .ui-bottom {
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+    }
+
+    /* 2-3. 좌측 (OFFICE) */
+    .ui-left {
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 2-4. 우측 (NEXT) */
+    .ui-right {
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: right;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 호버 효과 */
+    .ui-left:hover,
+    .ui-right:hover {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+    }
+
+    /* [3] 메인 컨테이너 */
+    .mobile-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 80px 80px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    /* [4] 섹션 박스 */
+    .plane-section {
+      position: relative;
+      background: #fff;
+      border: none;
+      padding: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* img와 video 모두 꽉 차게 설정 */
+    .plane-section img,
+    .plane-section video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* [5] 하단 설명 텍스트 */
+    .instruction {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      font-family: monospace;
+      line-height: 1.8;
+      max-width: 450px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+      word-break: keep-all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="fixed-ui ui-top">1,2,3,4,5,6,7,8,9,10,</div>
+  <div class="fixed-ui ui-bottom">차리수</div>
+
+  <div class="fixed-ui ui-left" onclick="location.href='/index.html'">
+    OFFICE
+  </div>
+
+  <div class="fixed-ui ui-right" onclick="goRandomPage()">
+    NEXT
+  </div>
+
+
+  <div class="mobile-container">
+
+    <section class="plane-section">
+      <img src="/img/risoo/1(대표 이미지).webp" alt="Image 1">
+    </section>
+
+    <section class="plane-section">
+      <img src="/img/risoo/2.webp" alt="Image 2">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/risoo/3.webp" alt="Image 3">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/risoo/4.webp" alt="Image 4">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/risoo/5.webp" alt="Image 5">
+    </section>
+
+  </div>
+
+  <div class="instruction">
+    본 작업에서는 디자인 소프트웨어 Illustrator가 설치되는 순간부터 함께 존재해 온 기본 심볼들을
+    작업에 사용되는 도구로 설정한다. 이 심볼들은 별도의 다운로드나 환경 설정 없이 언제 어디서나 동일하게 호출될 수 있으며, 새로 추가되거나 변형되지 않은 채 각각이 속한 분류와 그 안에서의 순서만이 그대로 정렬된다.
+    <br><br>
+    이와 같은 방식은 이동 중이거나 제한된 작업 환경에서도 즉시 실행 가능한 작업 절차로 기능하며,
+    새로운 시각 요소를 만들어내기보다는 이미 구성되어 있는 시스템을 따라 수행되는 과정에 가깝다.
+    그 결과, 디자인은 개인의 판단에 의해 완성되는 결과물이 아니라, 주어진 도구와 구조를 반복적으로 실행하는 과정 속에서 생성된다.
+  </div>
+
+  <script>
+    function goRandomPage() {
+      const pages = [
+        'seowoo.html',
+        'taeho.html',
+        'yeju.html',
+        'o.html',
+        'mhz.html',
+        'kibong.html',
+        'jungwook.html',
+        'jongeun.html',
+        'jiwon.html',
+        'jinmyeong.html',
+        'jasang.html',
+        'hyerim.html',
+        'dowon.html',
+        'chaebin.html',
+        'jungah.html'
+      ];
+      const randomTarget = pages[Math.floor(Math.random() * pages.length)];
+
+      if (randomTarget) {
+        location.href = randomTarget;
+      } else {
+        alert("이동할 페이지가 없습니다.");
+      }
+    }
+  </script>
+</body>
+
+</html>

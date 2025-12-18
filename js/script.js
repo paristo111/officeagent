@@ -1,7 +1,7 @@
     // ------------------------------------------
     // 사람(작은 사각형) 10명을 만들어 땅 위에서 걷게 하기
     // ------------------------------------------
-    const PEOPLE_COUNT = 13;
+    const PEOPLE_COUNT = 16;
     const PERSON_WIDTH = 5; // CSS .person width와 동일하게 유지
     const persons = [];
     const scene = document.getElementById("scene");
@@ -116,7 +116,7 @@
       // 생성 높이 (화면 상단 5% ~ 50%)
       topRange: { min: 5, max: 75 },
       // 이동 속도 (초 단위, 숫자가 클수록 느림)
-      duration: { min: 45, max: 60 }
+      duration: { min: 20, max: 25 }
     };
 
     /**
