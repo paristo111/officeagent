@@ -17,13 +17,193 @@
             align-items: center;
         }
 
+        .fixed-label {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #000;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        #nameTop {
+            top: 30px;
+        }
+
+        #titleBottom {
+            bottom: 30px;
+        }
+
+        .axis-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 160;
+            pointer-events: auto;
+            perspective: 900px;
+            background: none;
+            border-radius: 16px;
+            /* box-shadow: 0 12px 25px rgba(0,0,0,0.15); */
+        }
+
+        .axis-indicator {
+            position: relative;
+            width: 110px; 
+            height: 110px;
+        }
+
+        .axis-visual {
+            position: relative;
+            width: 110px; 
+            height: 110px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .axis-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: rgba(0,0,0,0.65);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
+
+        .axis-arm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: rgba(0,0,0,0.45);
+            transform-origin: center center;
+        }
+
+        .axis-arm::before,
+        .axis-arm::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(0,0,0,0.45);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+        }
+
+        .axis-arm-x {
+            width: 140px;
+            height: 2px;
+            transform: translate(-50%, -50%);
+        }
+
+        .axis-arm-x::before {
+            transform: translate(-65px, -50%);
+        }
+
+        .axis-arm-x::after {
+            transform: translate(65px, -50%);
+        }
+
+        .axis-arm-z {
+            width: 2px;
+            height: 140px;
+            transform: translate(-50%, -50%);
+        }
+
+        .axis-arm-z::before {
+            transform: translate(-50%, -65px);
+        }
+
+        .axis-arm-z::after {
+            transform: translate(-50%, 65px);
+        }
+
+        .axis-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            pointer-events: auto;
+            --axis-color: rgba(0,0,0,0.6);
+        }
+
+        .axis-node__label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.08rem;
+            color: #fff;
+            background: var(--axis-color);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            pointer-events: none;
+            min-width: 52px;
+            justify-content: center;
+        }
+
+        .axis-node-text {
+            transform: translate(-50%, -50%) translateX(80px);
+            --axis-color: #d32f2f;
+        }
+
+        .axis-node-image {
+            transform: translate(-50%, -50%) translateX(-80px);
+            --axis-color: #1976d2;
+        }
+
+        .axis-node-title {
+            transform: translate(-50%, -50%) translateY(-80px);
+            --axis-color: #2e7d32;
+        }
+
+        .axis-node-bgm {
+            transform: translate(-50%, -50%) translateY(80px);
+            --axis-color: #8e24aa;
+        }
+
+        /* .axis-nav-title .axis-nav-btn {
+            background: rgba(0,0,0,0.85);
+        }
+
+        .axis-nav-text .axis-nav-btn {
+            background: rgba(255,112,67,0.85);
+        }
+
+        .axis-nav-image .axis-nav-btn {
+            background: rgba(66,165,245,0.85);
+        } */
+
+
         /* 2. 모든 평면을 담고 있는 월드 (회전체) */
         .world {
             position: relative;
             width: 0;
             height: 0;
             transform-style: preserve-3d; /* 자식 요소들의 3D 속성 유지 */
-            transform: rotateX(-20deg) rotateY(45deg); /* 초기 각도 */
+            transform: rotateX(0deg) rotateY(0deg); /* 초기 각도 */
             transition: transform 0.1s ease-out; /* 부드러운 움직임 */
         }
 
@@ -35,6 +215,7 @@
             width: 100vw; /* 화면을 꽉 채우기 위해 매우 크게 설정 */
             height: 100vh;
             transform-origin: center center;
+            transform-style: preserve-3d;
             /* 그리드 패턴 (모눈종이 느낌) */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0) 1px, transparent 1px),
@@ -49,8 +230,108 @@
             align-items: center;
             font-size: 2rem;
             font-weight: bold;
-            pointer-events: none; /* 마우스 이벤트 통과 */
+            user-select: none;
         }
+
+.plane-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.plane-front {
+    transform: translateZ(0.5px);
+}
+
+.plane-face .axis-label,
+.plane-face .content,
+.plane-face .back-content {
+    pointer-events: auto;
+}
+
+.plane-back {
+    transform: rotateY(180deg) translateZ(0.5px);
+}
+
+.back-content {
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 420px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.dj-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dj-panel__header h2 {
+    margin: 6px 0;
+    font-size: 1.4rem;
+}
+
+.dj-panel__tag {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    margin: 0;
+}
+
+.dj-panel__lead {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.dj-panel__summary {
+    font-size: 1rem;
+    background: #111;
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 10px;
+    line-height: 1.4;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.dj-panel__meta {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.dj-panel__notice {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.dj-panel__code {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #050505;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.dj-panel__code pre {
+    margin: 0;
+    padding: 16px;
+    font-family: 'Fira Code', 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #e5e9f0;
+    white-space: pre-wrap;
+}
+
 
         /* 각 평면의 축 텍스트 표시용 */
         .axis-label {
@@ -58,18 +339,14 @@
             font-size: 1.5rem;
             opacity: 0.8;
             text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            pointer-events: none;
         }
 
-        #nameTop{
-            top: 30px;
-            right: 50%;
-            transform: translateX(50%);
+        .axis-label.interactive {
+            pointer-events: auto;
+            cursor: pointer;
         }
-        #titleBottom{
-            bottom: 30px;
-            right: 50%;
-            transform: translateX(50%);
-        }
+
         #textB{
             top: 50%;
             right: 30px;
