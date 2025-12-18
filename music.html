@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 작업실 (Monaco Edition)</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+
+    <video id="webcam-feed" autoplay playsinline></video>
+
+    <div class="audio-graphic-box">
+        <canvas id="audio-graphic-content"></canvas>
+    </div>
+
+    <div class="container">
+        <div id="mission-box">
+            <p>작업 환경 생성기</p>
+            <p id="mission-text">버튼을 눌러 오늘의 작업을 시작하세요.</p>
+         
+        </div>
+                <button id="generate-button">새로운 작업 환경 생성</button>
+        <button id="toggle-dj">live-dj</button>
+
+        <div id="editor-container"></div>
+        
+        <div id="status-message"></div>
+    </div>
+    
+    <button id="toggle-view">?</button>
+
+    <script src="js/music.js"></script>
+
+</body>
+</html>
