@@ -38,6 +38,10 @@ body.view-dj .axis-label {
     color: #fff;
 }
 
+body.view-dj #arrow img {
+    filter: invert(1);
+}
+
         /* 1. 3D 공간을 바라보는 카메라 역할 */
         .scene {
             width: 100vw;
@@ -60,9 +64,23 @@ body.view-dj .axis-label {
             text-transform: uppercase;
             color: #000;
             z-index: 150;
-            pointer-events: none;
+   
         }
 
+        #arrow {
+            /* cursor: ; */
+            top: 30px;
+            left: 38px;
+            width: 20px;
+            animation: bounce 2s infinite;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+            #arrow img{
+            
+   box-shadow: none;
+        }
         #nameBottom {
             bottom: 30px;
         }
@@ -328,6 +346,18 @@ body.view-dj .back-content--editor .dj-editor__pre {
             top: 50%;
             left: 30px;
             transform: translateY(-50%);
+        }
+
+        .yz-nav-right {
+            top: 50% !important;
+            right: 30px !important;
+            transform: translateY(-50%) !important;
+        }
+
+        .yz-nav-left {
+            top: 50% !important;
+            left: 30px !important;
+            transform: translateY(-50%) !important;
         }
         /* --- 평면별 배치 --- */
 

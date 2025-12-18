@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderCode = (profile, blueprint) => {
         const name = (nameEl?.innerText || '').trim() || '누군가';
         const code = `// --- OFFICE DJ MODE ---
-// ${name}의 오피스 음악 입니다.
+// ${name}의 오피스 음악
 
 const WORDS = ${JSON.stringify(profile.words, null, 2)};
 

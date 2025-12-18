@@ -139,39 +139,39 @@ window.onload = function() {
             plane.appendChild(back);
         }
 
-        const ensureNav = (face, rightText, leftText) => {
-            let right =
-                face.querySelector('.yz-nav-right') ||
-                Array.from(face.querySelectorAll('.axis-label.interactive[data-rotate="text"]')).find(
-                    (el) => el.style.right === '10px' && el.style.top === '50%'
-                );
-            if (!right) {
-                right = document.createElement('div');
-                right.className = 'axis-label interactive yz-nav-right';
-                right.style.top = '50%';
-                right.style.right = '10px';
-                face.insertBefore(right, face.firstChild);
-            }
-            right.dataset.rotate = 'text';
-            right.textContent = rightText;
-            right.classList.add('yz-nav-right');
+	        const ensureNav = (face, rightText, leftText) => {
+	            let right =
+	                face.querySelector('.yz-nav-right') ||
+	                Array.from(face.querySelectorAll('.axis-label.interactive[data-rotate="text"]')).find(
+	                    (el) => el.style.right === '10px' && el.style.top === '50%'
+	                );
+	            if (!right) {
+	                right = document.createElement('div');
+	                right.className = 'axis-label interactive yz-nav-right';
+	                right.style.top = '50%';
+	                right.style.right = '10px';
+	                face.insertBefore(right, face.firstChild);
+	            }
+	            right.dataset.rotate = 'text';
+	            right.textContent = rightText;
+	            right.classList.add('yz-nav-right');
 
             let left =
                 face.querySelector('.yz-nav-left') ||
                 Array.from(face.querySelectorAll('.axis-label.interactive[data-rotate="image"]')).find(
                     (el) => el.style.left === '10px' && el.style.top === '50%'
                 );
-            if (!left) {
-                left = document.createElement('div');
-                left.className = 'axis-label interactive yz-nav-left';
-                left.style.top = '50%';
-                left.style.left = '10px';
-                face.insertBefore(left, right.nextSibling);
-            }
-            left.dataset.rotate = 'image';
-            left.textContent = leftText;
-            left.classList.add('yz-nav-left');
-        };
+	            if (!left) {
+	                left = document.createElement('div');
+	                left.className = 'axis-label interactive yz-nav-left';
+	                left.style.top = '50%';
+	                left.style.left = '10px';
+	                face.insertBefore(left, right.nextSibling);
+	            }
+	            left.dataset.rotate = 'image';
+	            left.textContent = leftText;
+	            left.classList.add('yz-nav-left');
+	        };
 
         ensureNav(front, 'music', 'title');
         ensureNav(back, 'title', 'music');
