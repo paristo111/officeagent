@@ -17,13 +17,153 @@
             align-items: center;
         }
 
+        .fixed-label {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #000;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        #nameTop {
+            top: 30px;
+        }
+
+        #titleBottom {
+            bottom: 30px;
+        }
+
+        .axis-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 130px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 160;
+            pointer-events: auto;
+            perspective: 900px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .axis-indicator {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .axis-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #111;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0,0,0,0.35);
+        }
+
+        .axis-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: rgba(0,0,0,0.45);
+            transform-origin: center center;
+        }
+
+        .axis-line-title {
+            width: 2px;
+            height: 50px;
+            transform-origin: center bottom;
+            transform: translate(-1px, -100%) rotateX(85deg);
+        }
+
+        .axis-line-text {
+            width: 36px;
+            height: 2px;
+            background: #ff7043;
+            transform: translate(0, -1px);
+        }
+
+        .axis-line-image {
+            width: 36px;
+            height: 2px;
+            background: #42a5f5;
+            transform: translate(-36px, -1px);
+        }
+
+        .axis-nav {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            pointer-events: none;
+        }
+
+        .axis-nav-title {
+            transform: translate(-50%, -50%) translateZ(32px);
+        }
+
+        .axis-nav-text {
+            transform: translate(-50%, -50%) translateX(38px);
+        }
+
+        .axis-nav-image {
+            transform: translate(-50%, -50%) translateX(-38px);
+        }
+
+        .axis-nav-btn {
+            padding: 3px 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            letter-spacing: 0.05rem;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0,0,0,0.75);
+            cursor: pointer;
+            pointer-events: auto;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+
+        .axis-nav-title .axis-nav-btn {
+            background: rgba(0,0,0,0.85);
+        }
+
+        .axis-nav-text .axis-nav-btn {
+            background: rgba(255,112,67,0.85);
+        }
+
+        .axis-nav-image .axis-nav-btn {
+            background: rgba(66,165,245,0.85);
+        }
+
+        .axis-nav-btn:focus-visible {
+            outline: 2px solid #000;
+            outline-offset: 1px;
+        }
+
+
         /* 2. 모든 평면을 담고 있는 월드 (회전체) */
         .world {
             position: relative;
             width: 0;
             height: 0;
             transform-style: preserve-3d; /* 자식 요소들의 3D 속성 유지 */
-            transform: rotateX(-20deg) rotateY(45deg); /* 초기 각도 */
+            transform: rotateX(0deg) rotateY(0deg); /* 초기 각도 */
             transition: transform 0.1s ease-out; /* 부드러운 움직임 */
         }
 
@@ -35,6 +175,7 @@
             width: 100vw; /* 화면을 꽉 채우기 위해 매우 크게 설정 */
             height: 100vh;
             transform-origin: center center;
+            transform-style: preserve-3d;
             /* 그리드 패턴 (모눈종이 느낌) */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0) 1px, transparent 1px),
@@ -49,8 +190,45 @@
             align-items: center;
             font-size: 2rem;
             font-weight: bold;
-            pointer-events: none; /* 마우스 이벤트 통과 */
+            user-select: none;
         }
+
+.plane-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.plane-front {
+    transform: translateZ(0.5px);
+}
+
+.plane-face .axis-label,
+.plane-face .content,
+.plane-face .back-content {
+    pointer-events: auto;
+}
+
+.plane-back {
+    transform: rotateY(180deg) translateZ(0.5px);
+}
+
+.back-content {
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 420px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
 
         /* 각 평면의 축 텍스트 표시용 */
         .axis-label {
@@ -58,18 +236,14 @@
             font-size: 1.5rem;
             opacity: 0.8;
             text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            pointer-events: none;
         }
 
-        #nameTop{
-            top: 30px;
-            right: 50%;
-            transform: translateX(50%);
+        .axis-label.interactive {
+            pointer-events: auto;
+            cursor: pointer;
         }
-        #titleBottom{
-            bottom: 30px;
-            right: 50%;
-            transform: translateX(50%);
-        }
+
         #textB{
             top: 50%;
             right: 30px;
