@@ -16,61 +16,67 @@
 </head>
 
 <body>
-
-    <div class="fixed-label" id="arrow"> <img src="/img/arrow.png" alt=""> </div>
     <div class="fixed-label" id="nameBottom">박지원</div>
     <div class="fixed-label" id="titleTop">instant magazine</div>
 
 
     <div class="scene">
         <div class="world" id="world">
-
+            
             <div class="plane plane-xy">
                 <div class="plane-face plane-front">
-                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
-                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
-
+                    <div class="axis-label interactive" data-rotate="text" id="textB">텍스트</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">이미지</div>
+                    
                     <div class="content">
-                        <div id="img1">
+                            <div id="img1">
                             <img src="/img/jiwon/instant magazine web.webp" alt="jiwon 대표 이미지">
                         </div>
                     </div>
                 </div>
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">image</div>
-                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">text</div>
-                    <div class="back-content back-content--editor">
-                        <div class="dj-editor" aria-label="Office DJ code">
-                            <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
+                    <div class="content back-content">
+                        <div class="dj-panel" id="djPanel">
+                            <div class="dj-panel__header">
+                                <p class="dj-panel__tag">office dj mode</p>
+                                <h2>텍스트 기반 즉석 사운드</h2>
+                                <p class="dj-panel__lead">
+                                    앞면 텍스트(#explain)를 분석해 매물의 분위기에 맞는 루프를 자동 믹싱합니다.
+                                </p>
+                            </div>
+                            <div class="dj-panel__summary" id="djSummary">텍스트를 불러오는 중...</div>
+                            <div class="dj-panel__meta" id="djDetails"></div>
+                            <div class="dj-panel__controls">
+                                <button id="djPlay" class="dj-btn primary">음악 재생</button>
+                                <button id="djShuffle" class="dj-btn">다시 믹스</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="plane plane-yz">
                 <div class="plane-face plane-front">
-                    <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">music</div>
+                    <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">-Z Back</div>
                     <div class="axis-label interactive" data-rotate="image" style="top: 50%; left: 10px;">title</div>
 
                     <div class="content">
-                        <div id="explain">
-                            [매물 정보]<br>
-                            매물면적: 호수당 22.5cmX15cm<br>
-                            50w 6700K LED (전력 콘센트 옵션 포함)<br>
-                            위치: 서울대학교 49동12층 건물<br>
-                            준공일: 1999년 (내부 인테리어 리모델링이 완료되어 깔끔합니다.)<br>
-                            현재 총11세대 빈 전세 매물 있습니다.<br>
-                            [필수 입주요건]<br>
-                            소속과 전공 상관 무관합니다.<br>
-                            임대 장소는 49동 내 총 12층 24개 호실 입니다.<br>
-                            입주 유예기간은 12월 15일 부터 17일입니다.<br>
-                            실 거주 기간은 12월 19일 부터 21일 (금,토,일) 입니다.<br>
-                        </div>
+                      <div id="explain">
+                      
+                       [매물 정보]<br>
+매물면적: 호수당 22.5cmX15cm<br>
+50w 6700K LED (전력 콘센트 옵션 포함)<br>
+위치: 서울대학교 49동12층 건물<br>
+준공일: 1999년 (내부 인테리어 리모델링이 완료되어 깔끔합니다.)<br>
+현재 총11세대 빈 전세 매물 있습니다.<br>
+[필수 입주요건]<br>
+소속과 전공 상관 무관합니다.<br>
+임대 장소는 49동 내 총 12층 24개 호실 입니다.<br>
+입주 유예기간은 12월 15일 부터 17일입니다.<br>
+실 거주 기간은 12월 19일 부터 21일 (금,토,일) 입니다.<br>
                     </div>
                 </div>
+                </div>
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive" data-rotate="text" style="top: 50%; right: 10px;">title</div>
-                    <div class="axis-label interactive" data-rotate="image" style="top: 50%; left: 10px;">music</div>
                     <div class="content back-content">
                         <h2>LEASING NOTES</h2>
                         <p>뒷면에는 조건 정리, 문의 버튼 등 다른 인터랙션을 배치할 수 있습니다.</p>
@@ -82,7 +88,17 @@
                     </div>
                 </div>
             </div>
+            <div class="plane plane-zx">
+                <div class="axis-label" style="top: 10px; right: 50%;">-Z Back</div>
+                <div class="axis-label" style="bottom: 10px; right: 50%;">+Z Front</div>
+                <div class="axis-label" style="top: 50%; right: 10px;">+X Right</div>
+                <div class="axis-label" style="top: 50%; left: 10px;">-X Left</div>
 
+                <div class="content">
+                    ZX 평면<br>
+                    (바닥/천장 공간)
+                </div>
+            </div>
         </div>
     </div>
 

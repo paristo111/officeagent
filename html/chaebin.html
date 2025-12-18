@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/pages.css">
-    <script src="../js/pages.js"></script>
-    <title>둘러보시고 
-편하게 
-문의주세요! 
-(매물 있습니다)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <script defer src="../js/pages.js"></script>
+    <script defer src="../js/jiwon-dj.js"></script>
+    <title>한채빈</title>
    
 </head>
 <body>
@@ -17,20 +16,29 @@
         <div class="world" id="world">
             
             <div class="plane plane-xy">
-
- 
-                <div class="axis-label" id="nameTop" >한채빈</div>
-                <div class="axis-label" id="titleBottom" >Fishbowl of Echoes</div>
-                <div class="axis-label" id="textB" >텍스트-></div>
-                <div class="axis-label" id="imgB" ><-이미지</div>
-                
-                <div class="content">
-                                                            <div id="img1">
+                <div class="plane-face plane-front">
+                    <div class="axis-label" id="nameTop" >한채빈</div>
+                    <div class="axis-label" id="titleBottom" >Fishbowl of Echoes</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    
+                    <div class="content">
+                        <div id="img1">
                             <img src="/img/chaebin/전시용 웹 .webp" alt="chaebin 대표 이미지">
                         </div>
-
-            </div>
+                    </div>
                 </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="back-content back-content--editor">
+                        <div class="dj-editor" aria-label="Office DJ code">
+                            <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="plane plane-yz">
                 <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
                 <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
