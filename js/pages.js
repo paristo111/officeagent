@@ -90,10 +90,11 @@ window.onload = function() {
         const minX = width * minRatio;
         const maxX = Math.max(minX, width * maxRatio - cardWidth);
         const jitterX = Math.max(width * 0.02, 12);
-        const jitterY = Math.max(height * 0.05, 14);
+        const jitterY = Math.max(height * 0.12, 24);
+        const extraRight = width * 0.05;
         const centerY = height * 0.5;
 
-        let left = randomRange(minX, maxX) + randomRange(-jitterX, jitterX);
+        let left = randomRange(minX, maxX + extraRight) + randomRange(-jitterX, jitterX);
         let top = centerY - cardHeight / 2 + randomRange(-jitterY, jitterY);
 
         left = clamp(left, 0, width - cardWidth);
