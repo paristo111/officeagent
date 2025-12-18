@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOBILE OFFICE // EXHIBITION</title>
+  <style>
+    /* [1] 기본 설정 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* [2] 고정된 UI 요소 */
+    .fixed-ui {
+      position: fixed;
+      z-index: 9999;
+      font-family: monospace;
+      font-weight: bold;
+      color: #000;
+      user-select: none;
+      background-color: transparent;
+      padding: 5px;
+    }
+
+    /* 2-1. 상단 (제목) */
+    .ui-top {
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 2-2. 하단 (이름) */
+    .ui-bottom {
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+    }
+
+    /* 2-3. 좌측 (OFFICE) */
+    .ui-left {
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 2-4. 우측 (NEXT) */
+    .ui-right {
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: right;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 호버 효과 */
+    .ui-left:hover,
+    .ui-right:hover {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+    }
+
+    /* [3] 메인 컨테이너 */
+    .mobile-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 80px 80px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    /* [4] 섹션 박스 */
+    .plane-section {
+      position: relative;
+      background: #fff;
+      border: none;
+      padding: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* img와 video 모두 꽉 차게 설정 */
+    .plane-section img,
+    .plane-section video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* [5] 하단 설명 텍스트 */
+    .instruction {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      font-family: monospace;
+      line-height: 1.8;
+      max-width: 450px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+      word-break: keep-all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="fixed-ui ui-top">Mob at Speed</div>
+  <div class="fixed-ui ui-bottom">유도원</div>
+
+  <div class="fixed-ui ui-left" onclick="location.href='/index.html'">
+    OFFICE
+  </div>
+
+  <div class="fixed-ui ui-right" onclick="goRandomPage()">
+    NEXT
+  </div>
+
+
+  <div class="mobile-container">
+
+    <section class="plane-section">
+      <video autoplay loop muted playsinline>
+        <source src="/img/dowon/main_01.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section class="plane-section">
+      <video autoplay loop muted playsinline>
+        <source src="/img/dowon/sub_01.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section class="plane-section">
+      <video autoplay loop muted playsinline>
+        <source src="/img/dowon/sub_02.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section class="plane-section">
+      <video autoplay loop muted playsinline>
+        <source src="/img/dowon/sub_03.mp4" type="video/mp4">
+      </video>
+    </section>
+
+  </div>
+
+  <div class="instruction">
+〈Mob at Speed〉는 이동 중 수집되는 소리를 군중의 밀도와 흐름으로 빗대어 재현하는 도구이다. 이동이 잦은 환경을 재료로 삼아 조형을 지속해 보려는 실험이며 chatGPT와 html을 이용해 제작하였다.
+시선을 앞에 두고 이동할 때, 시선을 옆으로 두고 이동할 때, 혹은 멈춰 서 있을 때에 따라 이동의 리듬과 방향은 달라지며 이는 군중 생성 방식의 틀이되었다. 이 작업은 언어가 의미로 고정되기 이전의 분포적 상태에
+주목하며, 특정 언어 대신 기호를 사용한다. 소리는 속도를 지니고, 그 속도는 흩어지고 응집되며 군중처럼 형태를 만든다.
+
+  </div>
+
+  <script>
+    function goRandomPage() {
+      const pages = [
+        'seowoo.html',
+        'taeho.html',
+        'yeju.html',
+        'risoo.html',
+        'o.html',
+        'mhz.html',
+        'kibong.html',
+        'jungwook.html',
+        'jongeun.html',
+        'jiwon.html',
+        'jinmyeong.html',
+        'jasang.html',
+        'hyerim.html',
+        'chaebin.html',
+        'jungah.html'
+      ];
+      const randomTarget = pages[Math.floor(Math.random() * pages.length)];
+
+      if (randomTarget) {
+        location.href = randomTarget;
+      } else {
+        alert("이동할 페이지가 없습니다.");
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOBILE OFFICE // EXHIBITION</title>
+  <style>
+    /* [1] 기본 설정 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* [2] 고정된 UI 요소 */
+    .fixed-ui {
+      position: fixed;
+      z-index: 9999;
+      font-family: monospace;
+      font-weight: bold;
+      color: #000;
+      user-select: none;
+      background-color: transparent;
+      padding: 5px;
+    }
+
+    /* 2-1. 상단 (제목) */
+    .ui-top {
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 2-2. 하단 (이름) */
+    .ui-bottom {
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+    }
+
+    /* 2-3. 좌측 (OFFICE) */
+    .ui-left {
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 2-4. 우측 (NEXT) */
+    .ui-right {
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      font-size: 12px;
+      text-align: right;
+      cursor: pointer;
+      transition: text-shadow 0.2s ease;
+    }
+
+    /* 호버 효과 */
+    .ui-left:hover,
+    .ui-right:hover {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+    }
+
+    /* [3] 메인 컨테이너 */
+    .mobile-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 80px 80px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    /* [4] 섹션 박스 */
+    .plane-section {
+      position: relative;
+      background: #fff;
+      border: none;
+      padding: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* img와 video 모두 꽉 차게 설정 */
+    .plane-section img,
+    .plane-section video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* [5] 하단 설명 텍스트 */
+    .instruction {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      font-family: monospace;
+      line-height: 1.8;
+      max-width: 450px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+      word-break: keep-all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="fixed-ui ui-top">플랫랜드</div>
+  <div class="fixed-ui ui-bottom">최정욱</div>
+
+  <div class="fixed-ui ui-left" onclick="location.href='/index.html'">
+    OFFICE
+  </div>
+
+  <div class="fixed-ui ui-right" onclick="goRandomPage()">
+    NEXT
+  </div>
+
+
+  <div class="mobile-container">
+
+    <section class="plane-section">
+      <img src="/img/jungwook/최정욱_플랫랜드_03_대표이미지.webp" alt="Image 1">
+    </section>
+
+    <section class="plane-section">
+      <img src="/img/jungwook/최정욱_플랫랜드_01.webp" alt="Image 2">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/jungwook/최정욱_플랫랜드_02.webp" alt="Image 3">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/jungwook/최정욱_플랫랜드_04.webp" alt="Image 4">
+    </section>
+    
+    <section class="plane-section">
+      <img src="/img/jungwook/최정욱_플랫랜드_05.webp" alt="Image 5">
+    </section>
+
+  </div>
+
+  <div class="instruction">
+자, 이제 상상력을 조금만 더 발휘해서, 화면의 '안쪽'으로 움직인다고 생각해 보자. 캔버스 너머로 완전히 벗어나는 방향이지. 만약 사각형이 위쪽으로 움직인다면, 아래쪽의 점들은 위쪽의 점들이 있던 자리를 통과해서
+움직여야겠지. 하지만 내 말은 사각형 안의 모든 점이 공간을 뚫고 안쪽으로 지나간다는 뜻이야. 어떤 점도 다른 점이 있던 자리를 통과하지 않고, 각 점이 저마다의 직선을 그리면서 말이지. 우리는 그것을 '깊이'라고
+부르네.
+
+  </div>
+
+  <script>
+    function goRandomPage() {
+      const pages = [
+        'seowoo.html',
+        'taeho.html',
+        'yeju.html',
+        'risoo.html',
+        'o.html',
+        'mhz.html',
+        'kibong.html',
+        'jongeun.html',
+        'jiwon.html',
+        'jinmyeong.html',
+        'jasang.html',
+        'hyerim.html',
+        'dowon.html',
+        'chaebin.html',
+        'jungah.html'
+      ];
+      const randomTarget = pages[Math.floor(Math.random() * pages.length)];
+
+      if (randomTarget) {
+        location.href = randomTarget;
+      } else {
+        alert("이동할 페이지가 없습니다.");
+      }
+    }
+  </script>
+</body>
+
+</html>
