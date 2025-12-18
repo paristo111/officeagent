@@ -3,9 +3,9 @@
 window.onload = function() {
     
     const world = document.getElementById('world');
-    const axisIndicator = document.getElementById('axisIndicator');
+    const axisVisual = document.getElementById('axisVisual');
+    const axisPins = document.querySelectorAll('.axis-pin');
     const presetTriggers = document.querySelectorAll('[data-rotate]');
-    const axisNavButtons = document.querySelectorAll('.axis-nav-btn');
     
     // 안전장치: 만약 world를 못 찾았다면 에러를 띄우고 멈춥니다.
     if (!world) {
@@ -21,11 +21,11 @@ window.onload = function() {
     const applyRotation = () => {
         const transformValue = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         world.style.transform = transformValue;
-        if (axisIndicator) {
-            axisIndicator.style.transform = transformValue;
+        if (axisVisual) {
+            axisVisual.style.transform = transformValue;
         }
-        axisNavButtons.forEach((button) => {
-            button.style.transform = `rotateY(${-rotateY}deg) rotateX(${-rotateX}deg)`;
+        axisPins.forEach((pin) => {
+            pin.style.setProperty('--axis-facing', `rotateY(${-rotateY}deg) rotateX(${-rotateX}deg)`);
         });
     };
 
@@ -37,7 +37,8 @@ window.onload = function() {
     const absoluteAngles = {
         title: 0,
         text: -90,
-        image: 90
+        image: 90,
+        bgm: 180
     };
 
     const rotateRelative = (preset) => {
