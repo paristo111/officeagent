@@ -319,9 +319,100 @@ body.view-dj .dj-editor__pre,
 body.view-dj .back-content--editor .dj-editor__pre {
     color: #fff;
 }
+/* ✅ 모든 back면에서 갤러리 중앙 정렬 */
+.plane-face.plane-back {
+    position: relative !important;
+    overflow: hidden !important;
+}
 
+.plane-face.plane-back .content.back-content {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
 
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
+.plane-face.plane-back .yz-gallery {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* ✅ 갤러리 박스 */
+.plane-face.plane-back .leasing-media {
+    --g: 24px;
+    width: 86% !important;
+    height: 72% !important;
+
+    display: grid !important;
+    gap: var(--g) !important;
+}
+
+/* ✅ 전역 img absolute 같은 거 무력화 */
+.plane-face.plane-back .leasing-media>img {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+
+    object-fit: cover !important;
+    /* 안 잘리게면 contain */
+    object-position: center !important;
+}
+
+/* ✅ 1장 */
+.plane-face.plane-back .leasing-media[data-count="1"] {
+    place-items: center !important;
+}
+
+.plane-face.plane-back .leasing-media[data-count="1"]>img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 78% !important;
+    max-height: 78% !important;
+    object-fit: contain !important;
+}
+
+/* ✅ 2장 */
+.plane-face.plane-back .leasing-media[data-count="2"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: 1fr !important;
+}
+
+/* ✅ 3장(아래 가운데 1장) */
+.plane-face.plane-back .leasing-media[data-count="3"] {
+    max-width: 58% !important;
+    max-height: 58% !important;
+    transform: translateY(-40%);
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+}
+
+.plane-face.plane-back .leasing-media[data-count="3"]>img:nth-child(3) {
+    grid-column: 1 / -1;
+    width: calc((100% - var(--g)) / 2) !important;
+    justify-self: center !important;
+    max-width: 58% !important;
+    max-height: 58% !important;
+}
+
+/* ✅ 4장(2x2) */
+.plane-face.plane-back .leasing-media[data-count="4"] {
+    max-width: 58% !important;
+    max-height: 58% !important;
+    transform: translateY(-40%);
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+}
         /* 각 평면의 축 텍스트 표시용 */
         .axis-label {
             position: absolute;
@@ -423,7 +514,6 @@ body.view-dj .back-content--editor .dj-editor__pre {
             max-width: 100%;
             height: auto;
             border-radius: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }        
 #img1 {
     position: absolute;
