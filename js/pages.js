@@ -35,10 +35,15 @@ window.addEventListener('DOMContentLoaded', () => {
     let lastIsDj = null;
     let hasUserInteracted = false;
     let isAutoRotating = false;
+    let autoRotateStartTimer = null;
 
     const stopAutoRotate = () => {
         hasUserInteracted = true;
         isAutoRotating = false;
+        if (autoRotateStartTimer) {
+            window.clearTimeout(autoRotateStartTimer);
+            autoRotateStartTimer = null;
+        }
     };
 
     const setDjBackgroundFromHero = () => {
@@ -430,9 +435,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const shouldAutoRotate = window.location.pathname.includes('/html/');
     if (shouldAutoRotate) {
-        isAutoRotating = true;
         let lastAt = performance.now();
         const speedDegPerSec = 1.2;
+        const delayMs = 5000;
 
         const tick = (now) => {
             if (!isAutoRotating || hasUserInteracted) return;
@@ -443,9 +448,11 @@ window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(tick);
         };
 
-        requestAnimationFrame((now) => {
-            lastAt = now;
+        autoRotateStartTimer = window.setTimeout(() => {
+            if (hasUserInteracted) return;
+            isAutoRotating = true;
+            lastAt = performance.now();
             requestAnimationFrame(tick);
-        });
+        }, delayMs);
     }
 });
