@@ -12,16 +12,16 @@
 </head>
 <body>
     <a href="/index.html" class="fixed-label" id="arrow"><img src="/img/arrow.png" alt=""></a>
+    <div class="fixed-label" id="nameBottom">MHz</div>
+    <div class="fixed-label" id="titleTop">Oreu</div>
 
     <div class="scene">
         <div class="world" id="world">
             
             <div class="plane plane-xy">
                 <div class="plane-face plane-front">
-                    <div class="axis-label" id="nameTop" >MHz</div>
-                    <div class="axis-label" id="titleBottom" >Oreu</div>
-                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
-                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
                     
                     <div class="content">
                         <div id="img1">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
-                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">text</div>
                     <div class="back-content back-content--editor">
                         <div class="dj-editor" aria-label="Office DJ code">
                             <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
@@ -41,13 +41,12 @@
                 </div>
             </div>
             <div class="plane plane-yz">
-                <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
-                <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
-                <div class="axis-label" style="top: 50%; right: 10px;">-Z Back</div>
-                <div class="axis-label" style="top: 50%; left: 10px;">+Z Front</div>
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">music</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">title</div>
 
-                <div class="content">
-                  <div id="explain">
+                    <div class="content">
+                        <div id="explain">
 모여 울리는 겨울의 기억
 
 다가오는 크리스마스를 기념하며, 작은 겨울의 시간이 담긴 오르골  ‘Oreu’ 를 소개합니다.<br><br>
@@ -57,6 +56,19 @@ Oreu는 음악이 울리는 종이자, 기억을 장식하는 오너먼트이며
 Oreu는 개별로 놓일 때 오브제처럼 존재하고, 손으로 돌리면 맑은 선율이 흐릅니다. 여러 개를 위로 쌓아 올리면 트리의 형상이 만들어지며, 하나씩 더해지는 과정 속에서 그날의 추억이 차곡하게 쌓입니다.
 <br><br>
 Oreu와 함께 시간이 흘러도, 겨울의 기억을 곁에 두고 떠올릴 수 있기를 바랍니다.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">title</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">music</div>
+
+                    <div class="content back-content">
+                        <div class="yz-gallery">
+                            <!-- Add image layout here -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
