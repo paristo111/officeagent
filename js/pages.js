@@ -26,12 +26,82 @@ window.onload = function () {
     };
 
     const setDjBackgroundFromHero = () => {
+        const setDjBg = (url) => {
+            if (!url) return;
+            document.documentElement.style.setProperty('--dj-bg-image', `url("${url}")`);
+        };
+
+        const resolveUrl = (maybeUrl) => {
+            if (!maybeUrl) return null;
+            try {
+                return new URL(maybeUrl, window.location.href).href;
+            } catch {
+                return maybeUrl;
+            }
+        };
+
+        const tryImageCandidates = (candidates) => {
+            if (!Array.isArray(candidates) || candidates.length === 0) return;
+
+            let resolved = false;
+            const tryAt = (idx) => {
+                if (resolved) return;
+                if (idx >= candidates.length) return;
+                const candidate = resolveUrl(candidates[idx]);
+                if (!candidate) return tryAt(idx + 1);
+
+                const img = new Image();
+                img.onload = () => {
+                    resolved = true;
+                    setDjBg(candidate);
+                };
+                img.onerror = () => tryAt(idx + 1);
+                img.src = candidate;
+            };
+
+            tryAt(0);
+        };
+
         const heroImg = document.querySelector('#img1 img');
-        if (!heroImg) return;
-        const src = heroImg.getAttribute('src') || heroImg.src;
-        if (!src) return;
-        const resolved = heroImg.src || src;
-        document.documentElement.style.setProperty('--dj-bg-image', `url("${resolved}")`);
+        if (heroImg) {
+            const src = heroImg.getAttribute('src') || heroImg.src;
+            const resolved = resolveUrl(heroImg.src || src);
+            if (resolved) setDjBg(resolved);
+            return;
+        }
+
+        const heroVideo = document.querySelector('#img1 video');
+        if (heroVideo) {
+            const poster = heroVideo.getAttribute('poster');
+            if (poster) {
+                const resolved = resolveUrl(poster);
+                if (resolved) setDjBg(resolved);
+                return;
+            }
+        }
+
+        const pathname = (window.location.pathname || '').toLowerCase();
+        const filename = pathname.split('/').pop() || '';
+        const slug = filename.replace(/\.html?$/i, '').trim();
+        if (!slug) return;
+
+        let folder = slug;
+        const videoSourceEl = document.querySelector('#img1 video source');
+        if (videoSourceEl) {
+            const videoSrc = videoSourceEl.getAttribute('src') || '';
+            const match = videoSrc.match(/\/img\/([^/]+)\//i);
+            if (match && match[1]) folder = match[1];
+        }
+
+        const exts = ['webp', 'png', 'jpg', 'jpeg', 'gif'];
+        const candidates = [];
+        for (let n = 1; n <= 12; n += 1) {
+            for (const ext of exts) {
+                candidates.push(`/img/${folder}/${folder}${n}.${ext}`);
+            }
+        }
+
+        tryImageCandidates(candidates);
     };
 
     const applyDjVolume = (isDj) => {
@@ -111,7 +181,7 @@ window.onload = function () {
         if (!element) return false;
         return Boolean(
             element.closest(
-                '[data-rotate], button, a, input, textarea, select, .content, .back-content, .dj-panel, #explain'
+                '[data-rotate], button, a, input, textarea, select, .back-content, .dj-panel, #explain'
             )
         );
     };
@@ -177,10 +247,7 @@ window.onload = function () {
     if (titleTop) {
         titleTop.addEventListener('click', (event) => {
             event.preventDefault();
-            stopAutoRotate();
-            rotateX = 0;
-            rotateY = 0;
-            applyRotation();
+            window.location.reload();
         });
     }
 

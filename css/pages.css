@@ -87,6 +87,8 @@ body.view-dj #arrow img {
 
         #titleTop {
             top: 30px;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         /* 2. 모든 평면을 담고 있는 월드 (회전체) */
@@ -149,7 +151,7 @@ body.view-dj #arrow img {
 }
 
 .plane-xy .plane-front .content {
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .plane-back {
@@ -434,6 +436,15 @@ body.view-dj .back-content--editor .dj-editor__pre {
             transform: translate(-50%, -50%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    pointer-events: none;
+}
+
+a#img1 {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+a#img1 video {
     pointer-events: none;
 }
 
