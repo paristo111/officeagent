@@ -12,16 +12,16 @@
 </head>
 <body>
     <a href="/index.html" class="fixed-label" id="arrow"><img src="/img/arrow.png" alt=""></a>
+    <div class="fixed-label" id="nameBottom">최정욱</div>
+    <div class="fixed-label" id="titleTop">flatland</div>
 
     <div class="scene">
         <div class="world" id="world">
             
             <div class="plane plane-xy">
                 <div class="plane-face plane-front">
-                    <div class="axis-label" id="nameTop" >최정욱</div>
-                    <div class="axis-label" id="titleBottom" >instant magazine</div>
-                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
-                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
                     
                     <div class="content">
                         <div id="img1">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
-                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">text</div>
                     <div class="back-content back-content--editor">
                         <div class="dj-editor" aria-label="Office DJ code">
                             <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
@@ -41,13 +41,12 @@
                 </div>
             </div>
             <div class="plane plane-yz">
-                <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
-                <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
-                <div class="axis-label" style="top: 50%; right: 10px;">-Z Back</div>
-                <div class="axis-label" style="top: 50%; left: 10px;">+Z Front</div>
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">music</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">title</div>
 
-                <div class="content">
-                  <div id="explain">
+                    <div class="content">
+                        <div id="explain">
 
 
 "자, 이제 상상력을 조금만 더 발휘해서, 화면의 '안쪽'으로 움직인다고 생각해 보자. 캔버스 너머로 완전히 벗어나는 방향이지. 만약 사각형이 위쪽으로 움직인다면, 아래쪽의 점들은 위쪽의 점들이 있던 자리를 통과해서 움직여야겠지. 하지만 내 말은 사각형 안의 모든 점이 공간을 뚫고 안쪽으로 지나간다는 뜻이야. 어떤 점도 다른 점이 있던 자리를 통과하지 않고, 각 점이 저마다의 직선을 그리면서 말이지. 우리는 그것을 '깊이'라고 부르네."
@@ -57,6 +56,19 @@
 주소
 
 https://flatland1884.vercel.app/
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">title</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">music</div>
+
+                    <div class="content back-content">
+                        <div class="yz-gallery">
+                            <!-- Add image layout here -->
+                        </div>
+                    </div>
                 </div>
             </div>
 

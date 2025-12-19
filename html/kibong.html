@@ -12,16 +12,16 @@
 </head>
 <body>
     <a href="/index.html" class="fixed-label" id="arrow"><img src="/img/arrow.png" alt=""></a>
+    <div class="fixed-label" id="nameBottom">조기봉</div>
+    <div class="fixed-label" id="titleTop">Grid Drawing Tool</div>
 
     <div class="scene">
         <div class="world" id="world">
             
             <div class="plane plane-xy">
                 <div class="plane-face plane-front">
-                    <div class="axis-label" id="nameTop" >조기봉</div>
-                    <div class="axis-label" id="titleBottom" >Grid Drawing Tool</div>
-                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
-                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
                     
                     <div class="content">
                         <div id="img1">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
-                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">text</div>
                     <div class="back-content back-content--editor">
                         <div class="dj-editor" aria-label="Office DJ code">
                             <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
@@ -41,13 +41,12 @@
                 </div>
             </div>
             <div class="plane plane-yz">
-                <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
-                <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
-                <div class="axis-label" style="top: 50%; right: 10px;">-Z Back</div>
-                <div class="axis-label" style="top: 50%; left: 10px;">+Z Front</div>
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">music</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">title</div>
 
-                <div class="content">
-                  <div id="explain">
+                    <div class="content">
+                        <div id="explain">
 세상에는 정확하게 계산되지 않은 형태들이 많다.<br><br>
 
 저 곡선은 왜 하필 저만큼 휘어있을까?<br>
@@ -62,6 +61,19 @@
 육각형으로, 사각형으로.<br>
 
 https://keepon-cho.github.io/keep-on-drawing/
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">title</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">music</div>
+
+                    <div class="content back-content">
+                        <div class="yz-gallery">
+                            <!-- Add image layout here -->
+                        </div>
+                    </div>
                 </div>
             </div>
 

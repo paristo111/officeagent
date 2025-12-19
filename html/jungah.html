@@ -12,16 +12,16 @@
 </head>
 <body>
     <a href="/index.html" class="fixed-label" id="arrow"><img src="/img/arrow.png" alt=""></a>
+    <div class="fixed-label" id="nameBottom">이정아</div>
+    <div class="fixed-label" id="titleTop">when-you-got-nothing-to-work-on-agent.</div>
 
     <div class="scene">
         <div class="world" id="world">
             
             <div class="plane plane-xy">
                 <div class="plane-face plane-front">
-                    <div class="axis-label" id="nameTop" >이정아</div>
-                    <div class="axis-label" id="titleBottom" >when-you-got-nothing-to-work-on-agent.</div>
-                    <div class="axis-label interactive" data-rotate="text" id="textB" >텍스트-></div>
-                    <div class="axis-label interactive" data-rotate="image" id="imgB" ><-이미지</div>
+                    <div class="axis-label interactive" data-rotate="text" id="textB">text</div>
+                    <div class="axis-label interactive" data-rotate="image" id="imgB">image</div>
                     
                     <div class="content">
                         <div id="img1">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="plane-face plane-back">
-                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">text</div>
-                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-right" data-rotate="text">image</div>
+                    <div class="axis-label interactive dj-nav dj-nav-left" data-rotate="image">text</div>
                     <div class="back-content back-content--editor">
                         <div class="dj-editor" aria-label="Office DJ code">
                             <pre class="dj-editor__pre"><code id="djCode">// loading...</code></pre>
@@ -41,19 +41,31 @@
                 </div>
             </div>
             <div class="plane plane-yz">
-                <div class="axis-label" style="top: 10px; right: 50%;">+Y Top</div>
-                <div class="axis-label" style="bottom: 10px; right: 50%;">-Y Bottom</div>
-                <div class="axis-label" style="top: 50%; right: 10px;">-Z Back</div>
-                <div class="axis-label" style="top: 50%; left: 10px;">+Z Front</div>
+                <div class="plane-face plane-front">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">music</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">title</div>
 
-                <div class="content">
-                  <div id="explain">
+                    <div class="content">
+                        <div id="explain">
                   
 우리는 길을 잃은 디자이너들을 위한 작은 에이전트이자 잠시 방향을 놓친 어린 양들을 위한 느슨한 목자입니다. <br><br>
 
 어디로 가야 할지 잠깐 헷갈리거나 초원 어딘가에서 잠시 헤매고 있다는 기분이 들 때 이곳에 들러보세요. 이 에이전트는 당신만을 위한 하나의 디자인 지시서를 조용히 건네줍니다. <br><br>
 
 길을 잃었다는 건 실패가 아니라, 잠시 다른 풀밭에 서 있다는 뜻일지도 모르니까요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plane-face plane-back">
+                    <div class="axis-label interactive yz-nav-right" data-rotate="text">title</div>
+                    <div class="axis-label interactive yz-nav-left" data-rotate="image">music</div>
+
+                    <div class="content back-content">
+                        <div class="yz-gallery">
+                            <!-- Add image layout here -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
