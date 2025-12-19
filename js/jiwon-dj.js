@@ -43,12 +43,76 @@ document.addEventListener('DOMContentLoaded', () => {
         return picked;
     };
 
+    const pickOne = (items, rng = Math.random) => items[Math.floor(rng() * items.length)];
+
     const hashString = (value) => {
         let hash = 0;
         for (let i = 0; i < value.length; i += 1) {
             hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
         }
         return hash;
+    };
+
+    const normalizeOscillatorType = (value, fallback = 'square') => {
+        const allowed = new Set(['sine', 'triangle', 'square', 'sawtooth', 'pulse']);
+        const candidate = String(value || '').toLowerCase().trim();
+        return allowed.has(candidate) ? candidate : fallback;
+    };
+
+    const TECHNO_MISSION = {
+        space: [
+            { text: '카페', reverb: 0.1, filterFreq: 12000, desc: '약한 잔향.' },
+            { text: '집 (방문 닫고)', reverb: 0.01, filterFreq: 8000, desc: '드라이하고 포커스됨.' },
+            { text: '야외 벤치', reverb: 0.5, filterFreq: 18000, desc: '광활한 잔향.' },
+            { text: '물리치료실', reverb: 0.3, filterFreq: 5000, desc: '중간 잔향.' },
+            { text: '코인노래방 부스', reverb: 0.8, filterFreq: 2000, desc: '과도한 잔향.' }
+        ],
+        time: [
+            { text: '밤에 2시간 동안', bpm: 128, density: '4n', desc: '안정적인 미드 템포.' },
+            { text: '새벽에 20분 동안', bpm: 135, density: '8n', desc: '빠르고 고밀도의 템포.' },
+            { text: '아침에 5분씩 끊어서', bpm: 122, density: '4n', desc: '느긋한 템포.' },
+            { text: '수업 직전에 4시간 동안', bpm: 138, density: '16n', desc: '최고 속도.' }
+        ],
+        tool: [
+            { text: '블렌더', bassOscillator: 'square', bassFreq: 'C2', desc: '메탈릭한 스퀘어 베이스.' },
+            { text: '피그마', bassOscillator: 'sine', bassFreq: 'D#2', desc: '부드러운 사인파 베이스.' },
+            { text: '비주얼 스튜디오', bassOscillator: 'sawtooth', bassFreq: 'A1', desc: '묵직한 톱니파 베이스.' },
+            { text: '그림판', bassOscillator: 'pulse', bassFreq: 'F#2', desc: '날카로운 펄스파.' }
+        ],
+        style: [
+            { text: '커피를 마시며', swing: 0.0, desc: '정확한 4/4 박자.' },
+            { text: '엉덩이를 흔들며', swing: 0.15, desc: '스윙 적용.' },
+            { text: '복식호흡을 하며', swing: 0.05, desc: '미세한 스윙.' },
+            { text: '술에 취한 상태에서', swing: 0.25, desc: '과도한 스윙.' }
+        ],
+        constraint: [
+            { text: '마감 효율을 최대로 끌어올려서', crush: 8, desc: '강력한 BitCrusher (8).' },
+            { text: '인터넷 없이', crush: 4, desc: '중간 BitCrusher (4).' },
+            { text: '특별한 제한 조건 없이', crush: 1, desc: 'BitCrusher Off (1).' },
+            { text: '교수님을 비난하며(맹렬하게)', crush: 16, desc: '극단적인 왜곡.' }
+        ]
+    };
+
+    const buildTechnoMission = (rng, genre) => {
+        const wetSpaces = TECHNO_MISSION.space.filter((item) => item.reverb >= 0.3);
+        const drySpaces = TECHNO_MISSION.space.filter((item) => item.reverb <= 0.3);
+        const spacePool =
+            genre === 'berlinTechnoMoist'
+                ? (rng() < 0.8 ? wetSpaces : TECHNO_MISSION.space)
+                : genre === 'berlinTechno'
+                  ? (rng() < 0.75 ? drySpaces : TECHNO_MISSION.space)
+                  : TECHNO_MISSION.space;
+
+        const tool = { ...pickOne(TECHNO_MISSION.tool, rng) };
+        tool.bassOscillator = normalizeOscillatorType(tool.bassOscillator, 'square');
+
+        return {
+            space: pickOne(spacePool, rng),
+            time: pickOne(TECHNO_MISSION.time, rng),
+            tool,
+            style: pickOne(TECHNO_MISSION.style, rng),
+            constraint: pickOne(TECHNO_MISSION.constraint, rng)
+        };
     };
 
     const genreFromPath = () => {
@@ -93,11 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const defaults = genreDefaults[genre] || genreDefaults.altIndieTeen;
-        const bpm = Math.round(clamp(defaults.bpmMin + rng() * (defaults.bpmMax - defaults.bpmMin), 85, 180));
+        let bpm = Math.round(clamp(defaults.bpmMin + rng() * (defaults.bpmMax - defaults.bpmMin), 85, 180));
         const mode = defaults.mode;
         const density = defaults.density;
 
-        return { seed, genre, bpm, density, mode, swing: defaults.swing, scaleRoot, vibe, words: picked };
+        const technoLike = genre === 'berlinTechno' || genre === 'berlinTechnoMoist' || genre === 'peggyHouse';
+        const mission = technoLike ? buildTechnoMission(rng, genre) : null;
+        if (mission) {
+            bpm = Math.round(clamp(mission.time.bpm + (rng() - 0.5) * 4, 85, 180));
+        }
+
+        const swing = mission ? clamp(mission.style.swing, 0, 0.3) : defaults.swing;
+
+        return { seed, genre, bpm, density, mode, swing, scaleRoot, vibe, words: picked, mission };
     };
 
     const buildBlueprint = (profile) => {
@@ -127,21 +199,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const chord = (profile.mode === 'major' ? majorPad : minorPad)[root] || majorPad.C;
         const rootLow = `${root}${profile.genre === 'cuteJpop' ? 2 : 1}`;
         const rootMid = `${root}2`;
+        const mission = profile.mission || null;
+        const bassBase = mission?.tool?.bassFreq || rootLow;
+        const bassAlt = mission ? Tone.Frequency(bassBase).transpose(rng() < 0.65 ? 7 : 12).toNote() : rootMid;
 
         const patterns16 = {
             fourOnFloor: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
             backbeat: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
             offbeatHat: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-            eighthHat: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            eighthHat: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+            sixteenthHat: Array.from({ length: 16 }, () => 1)
         };
 
         const pick = (arr) => arr[Math.floor(rng() * arr.length)];
+        const hatStepsFromDensity = (density) => {
+            if (density === '16n') return patterns16.sixteenthHat;
+            if (density === '8n') return patterns16.eighthHat;
+            return patterns16.offbeatHat;
+        };
 
         const base = {
             padEvents: [chord, null, chord, null],
             padSubdiv: '2n',
             padDur: '2n',
-            bassEvents: [rootLow, null, rootLow, null, rootLow, null, rootLow, null],
+            bassEvents: [bassBase, null, bassBase, null, bassBase, null, bassBase, null],
             bassSubdiv: '8n',
             bassDur: '16n',
             drumSubdiv: '16n',
@@ -155,10 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (profile.genre === 'berlinTechno' || profile.genre === 'berlinTechnoMoist') {
             const technoBass = [
-                rootLow, null, rootLow, null,
-                rootLow, null, rootLow, null,
-                rootMid, null, rootLow, null,
-                rootLow, null, rootLow, null
+                bassBase, null, bassBase, null,
+                bassBase, null, bassBase, null,
+                bassAlt, null, bassBase, null,
+                bassBase, null, bassBase, null
             ];
 
             base.padEvents = [chord, null, chord, null, chord, null, chord, null];
@@ -169,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             base.bassDur = '16n';
             base.kickSteps = patterns16.fourOnFloor;
             base.snareSteps = patterns16.backbeat.map((v) => (rng() < 0.5 ? v : 0));
-            base.hatSteps = patterns16.eighthHat;
+            base.hatSteps = mission?.time?.density ? hatStepsFromDensity(mission.time.density) : patterns16.eighthHat;
             base.openHatSteps = patterns16.offbeatHat;
             base.mix = { kick: -10, snare: -18, hat: -22, openHat: -18, pad: -22, bass: -12, lead: -99 };
             base.fx.masterFilterHz = profile.genre === 'berlinTechnoMoist' ? 1400 : 2400;
@@ -182,13 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
             base.padDur = '8n';
             base.kickSteps = patterns16.fourOnFloor;
             base.snareSteps = patterns16.backbeat;
-            base.hatSteps = patterns16.eighthHat;
+            base.hatSteps = mission?.time?.density ? hatStepsFromDensity(mission.time.density) : patterns16.eighthHat;
             base.openHatSteps = patterns16.offbeatHat;
             base.bassEvents = [
-                rootLow, null, rootLow, null,
-                rootLow, null, null, rootLow,
-                rootLow, null, rootLow, null,
-                rootLow, null, null, rootLow
+                bassBase, null, bassBase, null,
+                bassBase, null, null, bassBase,
+                bassAlt, null, bassBase, null,
+                bassBase, null, null, bassBase
             ];
             base.bassSubdiv = '16n';
             base.bassDur = '16n';
@@ -268,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderCode = (profile, blueprint) => {
         const name = (nameEl?.innerText || '').trim() || '누군가';
-        const code = `// --- OFFICE DJ ---
+        const code = `
 // ${name}의 작업 음악
 
 const WORDS = ${JSON.stringify(profile.words, null, 2)};
@@ -335,11 +416,13 @@ Tone.Transport.swing = ${profile.swing};
         Tone.Transport.swingSubdivision = '8n';
         Tone.Transport.bpm.value = profile.bpm;
 
+        const mission = profile.mission || null;
+
         const output = new Tone.Gain(1).toDestination();
         nodes.push(output);
 
         let masterIn = output;
-        if (blueprint.fx?.masterFilterHz) {
+        if (!mission && blueprint.fx?.masterFilterHz) {
             const masterFilter = new Tone.Filter({
                 type: 'lowpass',
                 frequency: blueprint.fx.masterFilterHz,
@@ -349,10 +432,28 @@ Tone.Transport.swing = ${profile.swing};
             masterIn = masterFilter;
         }
 
+        let rhythmIn = masterIn;
+        if (mission) {
+            const rhythmFilter = new Tone.Filter({
+                type: 'lowpass',
+                frequency: clamp(mission.space.filterFreq ?? 12000, 200, 20000),
+                Q: 0.8
+            });
+            const crusher = new Tone.BitCrusher(clamp(mission.constraint.crush ?? 1, 1, 16));
+            rhythmFilter.connect(crusher);
+            crusher.connect(output);
+            nodes.push(rhythmFilter, crusher);
+            rhythmIn = rhythmFilter;
+        }
+
         const reverb = new Tone.Reverb({
-            decay: profile.genre === 'altIndieTeen' ? 5.0 : 2.6,
+            decay: mission ? clamp((mission.space.reverb ?? 0.12) * 5, 0.01, 10) : profile.genre === 'altIndieTeen' ? 5.0 : 2.6,
             preDelay: 0.01,
-            wet: clamp(blueprint.fx?.reverbWet ?? 0.12, 0, 0.9)
+            wet: clamp(
+                mission ? (blueprint.fx?.reverbWet ?? 0.12) * 0.5 + (mission.space.reverb ?? 0.12) * 0.5 : blueprint.fx?.reverbWet ?? 0.12,
+                0,
+                0.9
+            )
         }).connect(masterIn);
         nodes.push(reverb);
 
@@ -372,7 +473,7 @@ Tone.Transport.swing = ${profile.swing};
 
         let distortion = null;
         if ((blueprint.fx?.distortion ?? 0) > 0) {
-            distortion = new Tone.Distortion(clamp(blueprint.fx.distortion, 0, 0.9)).connect(masterIn);
+            distortion = new Tone.Distortion(clamp(blueprint.fx.distortion, 0, 0.9)).connect(mission ? rhythmIn : masterIn);
             nodes.push(distortion);
         }
 
@@ -394,7 +495,7 @@ Tone.Transport.swing = ${profile.swing};
             if (distortion) {
                 node.connect(distortion);
             } else {
-                node.connect(masterIn);
+                node.connect(mission ? rhythmIn : masterIn);
             }
         };
 
@@ -403,7 +504,7 @@ Tone.Transport.swing = ${profile.swing};
             octaves: profile.genre === 'arenaRock' ? 2 : 3,
             envelope: { attack: 0.001, decay: 0.22, sustain: 0, release: 0.4 }
         });
-        connectDry(kick);
+        kick.connect(mission ? rhythmIn : masterIn);
         kick.volume.value = blueprint.mix?.kick ?? -12;
 
         snare = new Tone.NoiseSynth({
@@ -451,16 +552,26 @@ Tone.Transport.swing = ${profile.swing};
         connectPad(padSynth);
         padSynth.volume.value = blueprint.mix?.pad ?? -22;
 
-        bassSynth = new Tone.MonoSynth({
-            oscillator: { type: profile.genre === 'arenaRock' ? 'sawtooth' : 'square' },
-            filter: {
-                Q: 1,
-                type: 'lowpass',
-                rolloff: -12,
-                frequency: profile.genre === 'berlinTechnoMoist' ? 700 : 950
-            },
-            envelope: { attack: 0.01, decay: 0.25, sustain: 0.15, release: 0.25 }
-        });
+        const technoLike = profile.genre === 'berlinTechno' || profile.genre === 'berlinTechnoMoist' || profile.genre === 'peggyHouse';
+        bassSynth =
+            mission && technoLike
+                ? new Tone.FMSynth({
+                      harmonicity: 3.0,
+                      modulationIndex: 10,
+                      envelope: { attack: 0.01, decay: 0.5, sustain: 0.1, release: 0.5 },
+                      carrier: { oscillator: { type: mission.tool.bassOscillator } },
+                      modulation: { oscillator: { type: 'sine' } }
+                  })
+                : new Tone.MonoSynth({
+                      oscillator: { type: profile.genre === 'arenaRock' ? 'sawtooth' : 'square' },
+                      filter: {
+                          Q: 1,
+                          type: 'lowpass',
+                          rolloff: -12,
+                          frequency: profile.genre === 'berlinTechnoMoist' ? 700 : 950
+                      },
+                      envelope: { attack: 0.01, decay: 0.25, sustain: 0.15, release: 0.25 }
+                  });
         connectBass(bassSynth);
         bassSynth.volume.value = blueprint.mix?.bass ?? -14;
 
