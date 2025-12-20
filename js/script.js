@@ -186,7 +186,7 @@
       const toggleBtn = document.querySelector('.toggle-moving-btn'); 
       
       // 1. 유휴 상태로 간주할 시간 (단위: 밀리초, 1000 = 1초)
-      const IDLE_TIMEOUT = 60000; 
+      const IDLE_TIMEOUT = 30000; 
 
       // 2. 초기 현수막 상태 (true: 펴짐, false: 접힘)
       let isExpanded = true; 
