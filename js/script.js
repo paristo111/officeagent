@@ -180,23 +180,74 @@
     // 기능 시작
     initFloatingTexts();
 
-    // 현수막, DOM 로드 후 실행
+    // 현수막 관리 및 유휴 감지 기능 추가 
     document.addEventListener('DOMContentLoaded', function() {
       const overlay = document.getElementById('banner');
-      const toggleBtn = document.querySelector('.toggle-moving-btn'); // 기존 버튼 선택 or 새로 추가
+      const toggleBtn = document.querySelector('.toggle-moving-btn'); 
       
-      let isExpanded = true; // 3. 확장 상태 추적
-      
-      // 버튼 토글: 1.6vh ↔ 56vh (1초)
-      function toggleOverlay() {
-        isExpanded = !isExpanded;
+      // 1. 유휴 상태로 간주할 시간 (단위: 밀리초, 1000 = 1초)
+      const IDLE_TIMEOUT = 60000; 
+
+      // 2. 초기 현수막 상태 (true: 펴짐, false: 접힘)
+      let isExpanded = true; 
+
+      // 3. 감지할 사용자 동작 목록 (필요 없는 감지 동작은 삭제 가능)
+      const userEvents = ['mousemove', 'keydown', 'touchstart', 'scroll', 'click'];
+
+      // -----------------------------------------------------------
+      // 내부 로직
+      // -----------------------------------------------------------
+      let idleTimer = null;
+
+      // 현수막 높이 업데이트 함수
+      function updateOverlay() {
         overlay.style.height = isExpanded ? '56vh' : '1.6vh';
       }
+
+      // 현수막 토글 (버튼 클릭 등 수동 조작 시)
+      function toggleOverlay() {
+        isExpanded = !isExpanded;
+        updateOverlay();
+        resetIdleTimer(); // 버튼 클릭도 사용 활동으로 간주
+      }
       
-      toggleBtn?.addEventListener('click', toggleOverlay); // 기존 버튼 연결
+      // 현수막 자동 확장 (유휴 상태 진입 시)
+      function expandOverlay() {
+        // 이미 펴져 있다면 동작하지 않음 (상태 유지)
+        if (!isExpanded) {
+            isExpanded = true;
+            updateOverlay();
+            // console.log("3초간 입력이 없어 현수막이 자동 확장되었습니다.");
+        }
+      }
+
+      // 타이머 리셋 함수 (사용자 활동 감지 시 호출)
+      function resetIdleTimer() {
+         // 기존 타이머가 돌고 있었다면 취소 (아직 3초가 안 지났으므로)
+         if (idleTimer) clearTimeout(idleTimer);
+         
+         // "사용 중이거나 현수막이 펴져 있는 동안은 펴진 상태로 유지"
+         // 활동이 감지되면 확장을 예약했던 타이머를 미루는 것이므로, 
+         // 현재 상태(접힘/펴짐)가 그대로 유지됩니다.
+         
+         // 다시 3초 카운트 시작
+         idleTimer = setTimeout(expandOverlay, IDLE_TIMEOUT);
+      }
+
+      // 이벤트 리스너 등록: 토글 버튼
+      toggleBtn?.addEventListener('click', toggleOverlay);
       
-      // 모바일 터치 지원 (선택)
+      // 이벤트 리스너 등록: 배너 직접 클릭 (모바일 등)
       overlay.addEventListener('click', function(e) {
         toggleOverlay(); 
       });
+
+      // 사용자 활동 감지 이벤트 등록
+      userEvents.forEach(evt => {
+          window.addEventListener(evt, resetIdleTimer);
+      });
+
+      // 초기 실행
+      resetIdleTimer(); // 감시 시작
+      updateOverlay();  // 초기 상태 적용
     });
